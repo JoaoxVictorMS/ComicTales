@@ -1,0 +1,486 @@
+{% extends "base.html" %}
+{% block title %}ComicTales - Página Inicial{% endblock %}
+{% block content %}
+
+<body>
+
+  <div class="banner-container-manga">
+    <!-- Primeiro banner -->
+    <div class="banner-manga">
+      <img src="{{ url_for('static', filename='1.png') }}" alt="Primeiro Banner" class="responsive-banner-manga">
+    </div>
+    <!-- Segundo banner -->
+    <div class="banner-manga">
+      <img src="{{ url_for('static', filename='2.png') }}" alt="Segundo Banner" class="responsive-banner-manga">
+    </div>
+  </div>
+
+  <br>
+  <br>
+  <br>
+
+
+  <h2 style="align-items: center;">Personagens</h2>
+
+  <br>
+  <br>
+
+  <div class="carrosselManga">
+    <button class="carrossel-flecha-manga" id="ant-Manga">&#10094;</button>
+    <div class="carrossel-manga-wrapper">
+      <div class="carrossel-manga-itens">
+        <!-- Grupo 1 de itens -->
+        <div class="carrossel-manga-grupo" id="group-1">
+          <div class="produto-manga-item">
+            <a href="{{ url_for('exibir_personagem', personagem_url='dragon-ball') }}">
+              <img src="{{ url_for('static', filename='GokuIcons.jpg') }}" alt="Dragon Ball">
+            </a>
+            <h4>Dragon Ball</h4>
+          </div>
+          <div class="produto-manga-item">
+            <a href="{{ url_for('exibir_personagem', personagem_url='one-piece') }}">
+              <img src="{{ url_for('static', filename='luffy.jpg') }}" alt="One Piece">
+            </a>
+            <h4>One Piece</h4>
+          </div>
+          <div class="produto-manga-item">
+            <a href="{{ url_for('exibir_personagem', personagem_url='naruto') }}">
+              <img src="{{ url_for('static', filename='narutoIcons.jpg') }}" alt="Naruto">
+            </a>
+            <h4>Naruto</h4>
+          </div>
+          <div class="produto-manga-item">
+            <a href="{{ url_for('exibir_personagem', personagem_url='bleach') }}">
+              <img src="{{ url_for('static', filename='ichigoIcons.jpg') }}" alt="Bleach">
+            </a>
+            <h4>Bleach</h4>
+          </div>
+          <div class="produto-manga-item">
+            <a href="{{ url_for('exibir_personagem', personagem_url='dandadan') }}">
+              <img src="{{ url_for('static', filename='DandadanIcon.jpg') }}" alt="Dandadan">
+            </a>
+            <h4>Dandadan</h4>
+          </div>
+        </div>
+        <!-- Grupo 2 de itens -->
+        <div class="carrossel-manga-grupo" id="group-2">
+          <div class="produto-manga-item">
+            <a href="{{ url_for('exibir_personagem', personagem_url='blue-lock') }}">
+              <img src="{{ url_for('static', filename='Isagi Yoichi.jpg') }}" alt="Blue Lock">
+            </a>
+            <h4>Blue Lock</h4>
+          </div>
+          <div class="produto-manga-item">
+            <a href="{{ url_for('exibir_personagem', personagem_url='kaiju') }}">
+              <img src="{{ url_for('static', filename='HoshinaIcon.jpg') }}" alt="Kaiju Nº8">
+            </a>
+            <h4>Kaiju Nº8</h4>
+          </div>
+          <div class="produto-manga-item">
+            <a href="{{ url_for('exibir_personagem', personagem_url='berserk') }}">
+              <img src="{{ url_for('static', filename='GusIcons.jpg') }}" alt="Berserk">
+            </a>
+            <h4>Berserk</h4>
+          </div>
+      <div class="produto-manga-item">
+        <a href="{{ url_for('exibir_personagem', personagem_url='sword-art-online') }}">
+      <img src="{{ url_for('static', filename='KiritoIcons.jpg') }}" alt="sao">
+        </a>
+            <h4>Sword Art Online</h4>
+          </div>
+          <div class="produto-manga-item">
+            <a href="{{ url_for('exibir_personagem', personagem_url='solo-leveling') }}">
+              <img src="{{ url_for('static', filename='SungIcons.jpg') }}" alt="Solo Leveling">
+            </a>
+            <h4>Solo Leveling</h4>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <button class="carrossel-flecha-manga" id="dep-Manga">&#10095;</button>
+  </div>
+
+  <br>
+  <br>
+  <br>
+  <!-- Carrossel Personagens Mobile -->
+  <div class="carrosselManga-mobile">
+    {% for personagem in personagens %}
+    <div class="produto-manga-item-mobile">
+      <a href="{{ url_for('personagem', personagem_url=personagem.nome|replace(' ', '-')) }}">
+        <img src="{{ url_for('static', filename=personagem.nome|replace(' ', '-') ~ '.jpeg') }}"
+          alt="{{ personagem.nome }}">
+      </a>
+      <h4>{{ personagem.nome }}</h4>
+    </div>
+    {% endfor %}
+  </div>
+
+
+
+  <!-- Lançamentos -->
+
+
+  <h2 style="align-items: center;">Lançamentos</h2>
+  <br>
+  <br>
+  <br>
+
+
+
+  <div class="carrosselLancamento">
+    <button class="carrossel-flecha-Lancamento" id="prev-lancamento">&#10094;</button>
+    <div class="carrossel-lancamento-wrapper">
+      <div class="carrossel-lancamento-items">
+        <!-- Grupo 1 de itens -->
+        <div class="carrossel-lancamento-grupo" id="group-1">
+          <div class="produto-lancamento-items">
+            <a href="{{ url_for('exibir_produto', produto_id=130) }}">
+              <img src="{{ url_for('static', filename='SPYXFAMILY.webp') }}" alt="Spy X Family Vol. 1">
+            </a>
+            <h4>Spy X Family Vol. 1</h4>
+            <br>
+            <p>R$ 28,80</p>
+            <form action="{{ url_for('adicionar_ao_carrinho', produto_id=130) }}" method="POST">
+              <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+              <button class="add-carrinho">Adicionar ao Carrinho</button>
+              <form action="{{ url_for('adicionar_a_lista_de_desejos', produto_id=130) }}" method="POST">
+                <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+                <button type="submit" class="wishlist">Adicionar à Lista de Desejos</button>
+              </form>
+          </div>
+          <div class="produto-lancamento-items">
+            <a href="{{ url_for('exibir_produto', produto_id=131) }}">
+              <img src="{{ url_for('static', filename='blackClover.webp') }}" alt="Black Clover Vol.1">
+            </a>
+            <h4>Black Clover Vol.1</h4>
+            <br>
+            <p>R$ 30,00</p>
+            <form action="{{ url_for('adicionar_ao_carrinho', produto_id=131) }}" method="POST">
+              <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+              <button class="add-carrinho">Adicionar ao Carrinho</button>
+              <form action="{{ url_for('adicionar_a_lista_de_desejos', produto_id=131) }}" method="POST">
+                <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+                <button type="submit" class="wishlist">Adicionar à Lista de Desejos</button>
+              </form>
+          </div>
+
+
+          <div class="produto-lancamento-items">
+            <a href="{{ url_for('exibir_produto', produto_id=132) }}">
+              <img src="{{ url_for('static', filename='demonSlayer.webp') }}"
+                alt="Demon Slayer - Kimetsu No Yaiba Vol. 1">
+            </a>
+            <h4>Demon Slayer - Kimetsu No Yaiba Vol. 1</h4>
+            <p>R$ 34,90</p>
+            <form action="{{ url_for('adicionar_ao_carrinho', produto_id=132) }}" method="POST">
+              <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+              <button class="add-carrinho">Adicionar ao Carrinho</button>
+              <form action="{{ url_for('adicionar_a_lista_de_desejos', produto_id=132) }}" method="POST">
+                <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+                <button type="submit" class="wishlist">Adicionar à Lista de Desejos</button>
+              </form>
+          </div>
+
+          <div class="produto-lancamento-items">
+            <a href="{{ url_for('exibir_produto', produto_id=133) }}">
+              <img src="{{ url_for('static', filename='oshinoKo.webp') }}" alt="Oshi No Ko Vol. 1">
+            </a>
+            <h4>Oshi No Ko Vol. 1</h4>
+            <br>
+            <p>R$ 33,90</p>
+
+            <form action="{{ url_for('adicionar_ao_carrinho', produto_id=133) }}" method="POST">
+              <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+              <button class="add-carrinho">Adicionar ao Carrinho</button>
+              <form action="{{ url_for('adicionar_a_lista_de_desejos', produto_id=133) }}" method="POST">
+                <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+                <button type="submit" class="wishlist">Adicionar à Lista de Desejos</button>
+              </form>
+          </div>
+          <div class="produto-lancamento-items">
+            <a href="{{ url_for('exibir_produto', produto_id=134) }}">
+              <img src="{{ url_for('static', filename='Vagabond.webp') }}" alt="Vagabond Vol. 1">
+            </a>
+            <h4>Vagabond Vol. 1</h4>
+            <br>
+            <p>R$ 41,90</p>
+            <form action="{{ url_for('adicionar_ao_carrinho', produto_id=134) }}" method="POST">
+              <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+              <button class="add-carrinho">Adicionar ao Carrinho</button>
+              <form action="{{ url_for('adicionar_a_lista_de_desejos', produto_id=134) }}" method="POST">
+                <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+                <button type="submit" class="wishlist">Adicionar à Lista de Desejos</button>
+              </form>
+          </div>
+        </div>
+        <!-- Grupo 2 de itens -->
+        <div class="carrossel-lancamento-grupo" id="group-2">
+          <div class="produto-lancamento-items">
+            <a href="{{ url_for('exibir_produto', produto_id=135) }}">
+              <img src="{{ url_for('static', filename='jujutsukaisen0.webp') }}" alt="Spy X Family Vol. 1">
+            </a>
+            <h4>Jujutsu Kaisen: Batalha De Feiticeiros 0</h4>
+            <p>R$ 35,50</p>
+            <form action="{{ url_for('adicionar_ao_carrinho', produto_id=135) }}" method="POST">
+              <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+              <button class="add-carrinho">Adicionar ao Carrinho</button>
+              <form action="{{ url_for('adicionar_a_lista_de_desejos', produto_id=135) }}" method="POST">
+                <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+                <button type="submit" class="wishlist">Adicionar à Lista de Desejos</button>
+              </form>
+          </div>
+          <div class="produto-lancamento-items">
+            <a href="{{ url_for('exibir_produto', produto_id=136) }}">
+              <img src="{{ url_for('static', filename='WindBreaker.webp') }}" alt="Spy X Family Vol. 1">
+              <h4>Wind Breaker 01</h4>
+              <br>
+              <p>R$ 24,60</p>
+              <form action="{{ url_for('adicionar_ao_carrinho', produto_id=146) }}" method="POST">
+                <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+                <button class="add-carrinho">Adicionar ao Carrinho</button>
+                <form action="{{ url_for('adicionar_a_lista_de_desejos', produto_id=136) }}" method="POST">
+                  <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+                  <button type="submit" class="wishlist">Adicionar à Lista de Desejos</button>
+                </form>
+          </div>
+          <div class="produto-lancamento-items">
+            <a href="{{ url_for('exibir_produto', produto_id=137) }}">
+              <img src="{{ url_for('static', filename='theelusivesamurai.webp') }}" alt="The Elusive Samurai 01">
+            </a>
+            <h4>The Elusive Samurai 01</h4>
+            <br>
+            <p>R$ 25,50</p>
+            <form action="{{ url_for('adicionar_ao_carrinho', produto_id=137) }}" method="POST">
+              <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+              <button class="add-carrinho">Adicionar ao Carrinho</button>
+              <form action="{{ url_for('adicionar_a_lista_de_desejos', produto_id=137) }}" method="POST">
+                <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+                <button type="submit" class="wishlist">Adicionar à Lista de Desejos</button>
+              </form>
+          </div>
+          <div class="produto-lancamento-items">
+            <a href="{{ url_for('exibir_produto', produto_id=138) }}">
+              <img src="{{ url_for('static', filename='BananaFish.webp') }}" alt="Banana Fish Vol. 1">
+            </a>
+            <h4>Banana Fish Vol. 1</h4>
+            <br>
+            <p>R$ 54,90</p>
+            <form action="{{ url_for('adicionar_ao_carrinho', produto_id=138) }}" method="POST">
+              <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+              <button class="add-carrinho">Adicionar ao Carrinho</button>
+              <form action="{{ url_for('adicionar_a_lista_de_desejos', produto_id=138) }}" method="POST">
+                <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+                <button type="submit" class="wishlist">Adicionar à Lista de Desejos</button>
+              </form>
+          </div>
+          <div class="produto-lancamento-items">
+            <a href="{{ url_for('exibir_produto', produto_id=139) }}">
+              <img src="{{ url_for('static', filename='TokyoGhoul.webp') }}" alt="Spy X Family Vol. 1">
+            </a>
+            <h4>Tokyo Ghoul Vol. 1</h4>
+            <br>
+            <p>R$ 34,70</p>
+            <form action="{{ url_for('adicionar_ao_carrinho', produto_id=139) }}" method="POST">
+              <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+              <button class="add-carrinho">Adicionar ao Carrinho</button>
+              <form action="{{ url_for('adicionar_a_lista_de_desejos', produto_id=139) }}" method="POST">
+                <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+                <button type="submit" class="wishlist">Adicionar à Lista de Desejos</button>
+              </form>
+          </div>
+        </div>
+      </div>
+    </div>
+    <button class="carrossel-flecha-Lancamento" id="next-lancamento">&#10095;</button>
+  </div>
+
+
+  <!-- Carrossel Lançamentos Mobile -->
+
+
+  <div class="carrossel-lancamento-mobile">
+    <div class="produto-lancamento-mobile">
+      <a href="{{ url_for('exibir_produto', produto_id=130) }}">
+        <img src="{{ url_for('static', filename='SPYXFAMILY.webp') }}" alt="Spy X Family Vol. 1">
+      </a>
+      <h4>Spy X Family Vol. 1</h4>
+      <br>
+      <p>R$ 28,80</p>
+      <form action="{{ url_for('adicionar_ao_carrinho', produto_id=130) }}" method="POST">
+        <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+        <button class="add-carrinho">Adicionar ao Carrinho</button>
+        <form action="{{ url_for('adicionar_a_lista_de_desejos', produto_id=130) }}" method="POST">
+          <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+          <button type="submit" class="wishlist">Adicionar à Lista de Desejos</button>
+        </form>
+    </div>
+    <div class="produto-lancamento-mobile">
+      <a href="{{ url_for('exibir_produto', produto_id=131) }}">
+        <img src="{{ url_for('static', filename='blackClover.webp') }}" alt="Black Clover Vol.1">
+      </a>
+      <h4>Black Clover Vol. 1</h4>
+      <br>
+      <p>R$ 30,00</p>
+      <form action="{{ url_for('adicionar_ao_carrinho', produto_id=131) }}" method="POST">
+        <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+        <button class="add-carrinho">Adicionar ao Carrinho</button>
+        <form action="{{ url_for('adicionar_a_lista_de_desejos', produto_id=131) }}" method="POST">
+          <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+          <button type="submit" class="wishlist">Adicionar à Lista de Desejos</button>
+        </form>
+    </div>
+    <div class="produto-lancamento-mobile">
+      <a href="{{ url_for('exibir_produto', produto_id=132) }}">
+        <img src="{{ url_for('static', filename='demonSlayer.webp') }}" alt="Demon Slayer - Kimetsu No Yaiba Vol. 1">
+      </a>
+      <h4>Demon Slayer - Kimetsu No Yaiba Vol. 1</h4>
+      <p>R$ 34,90</p>
+      <form action="{{ url_for('adicionar_ao_carrinho', produto_id=132) }}" method="POST">
+        <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+        <button class="add-carrinho">Adicionar ao Carrinho</button>
+        <form action="{{ url_for('adicionar_a_lista_de_desejos', produto_id=132) }}" method="POST">
+          <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+          <button type="submit" class="wishlist">Adicionar à Lista de Desejos</button>
+        </form>
+    </div>
+    <div class="produto-lancamento-mobile">
+      <a href="{{ url_for('exibir_produto', produto_id=133) }}">
+        <img src="{{ url_for('static', filename='oshinoKo.webp') }}" alt="Oshi No Ko Vol. 1">
+      </a>
+      <h4>Oshi no Ko Vol. 1</h4>
+      <br>
+      <p>R$ 33,90</p>
+      <form action="{{ url_for('adicionar_ao_carrinho', produto_id=133) }}" method="POST">
+        <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+        <button class="add-carrinho">Adicionar ao Carrinho</button>
+        <form action="{{ url_for('adicionar_a_lista_de_desejos', produto_id=133) }}" method="POST">
+          <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+          <button type="submit" class="wishlist">Adicionar à Lista de Desejos</button>
+        </form>
+    </div>
+    <div class="produto-lancamento-mobile">
+      <a href="{{ url_for('exibir_produto', produto_id=134) }}">
+        <img src="{{ url_for('static', filename='Vagabond.webp') }}" alt="Vagabond Vol. 1">
+      </a>
+      <h4>Vagabond Vol. 1</h4>
+      <br>
+      <p>R$ 41,90</p>
+      <form action="{{ url_for('adicionar_ao_carrinho', produto_id=134) }}" method="POST">
+        <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+        <button class="add-carrinho">Adicionar ao Carrinho</button>
+        <form action="{{ url_for('adicionar_a_lista_de_desejos', produto_id=134) }}" method="POST">
+          <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+          <button type="submit" class="wishlist">Adicionar à Lista de Desejos</button>
+        </form>
+    </div>
+    <div class="produto-lancamento-mobile">
+      <a href="{{ url_for('exibir_produto', produto_id=135) }}">
+        <img src="{{ url_for('static', filename='jujutsukaisen0.webp') }}"
+          alt="Jujutsu Kaisen: Batalha De Feiticeiros 0">
+      </a>
+      <h4>Jujutsu Kaisen: Batalha De Feiticeiros 0</h4>
+      <p>R$ 35,50</p>
+      <form action="{{ url_for('adicionar_ao_carrinho', produto_id=135) }}" method="POST">
+        <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+        <button class="add-carrinho">Adicionar ao Carrinho</button>
+        <form action="{{ url_for('adicionar_a_lista_de_desejos', produto_id=135) }}" method="POST">
+          <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+          <button type="submit" class="wishlist">Adicionar à Lista de Desejos</button>
+        </form>
+    </div>
+    <div class="produto-lancamento-mobile">
+      <a href="{{ url_for('exibir_produto', produto_id=136) }}">
+        <img src="{{ url_for('static', filename='WindBreaker.webp') }}" alt="Wind Breaker Vol. 1">
+      </a>
+      <h4>Wind Breaker Vol. 1</h4>
+      <br>
+      <p>R$ 24,60</p>
+      <form action="{{ url_for('adicionar_ao_carrinho', produto_id=136) }}" method="POST">
+        <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+        <button class="add-carrinho">Adicionar ao Carrinho</button>
+        <form action="{{ url_for('adicionar_a_lista_de_desejos', produto_id=136) }}" method="POST">
+          <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+          <button type="submit" class="wishlist">Adicionar à Lista de Desejos</button>
+        </form>
+    </div>
+    <div class="produto-lancamento-mobile">
+      <a href="{{ url_for('exibir_produto', produto_id=137) }}">
+        <img src="{{ url_for('static', filename='theelusivesamurai.webp') }}" alt="The Elusive Samurai 01">
+      </a>
+      <h4>The Elusive Samurai Vol. 1</h4>
+      <br>
+      <p>R$ 25,50</p>
+      <form action="{{ url_for('adicionar_ao_carrinho', produto_id=137) }}" method="POST">
+        <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+        <button class="add-carrinho">Adicionar ao Carrinho</button>
+        <form action="{{ url_for('adicionar_a_lista_de_desejos', produto_id=137) }}" method="POST">
+          <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+          <button type="submit" class="wishlist">Adicionar à Lista de Desejos</button>
+        </form>
+    </div>
+    <div class="produto-lancamento-mobile">
+      <a href="{{ url_for('exibir_produto', produto_id=138) }}">
+        <img src="{{ url_for('static', filename='BananaFish.webp') }}" alt="Banana Fish Vol. 1">
+      </a>
+      <h4>Banana Fish Vol. 1</h4>/
+      <br>
+      <p>R$ 54,90</p>
+      <form action="{{ url_for('adicionar_ao_carrinho', produto_id=138) }}" method="POST">
+        <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+        <button class="add-carrinho">Adicionar ao Carrinho</button>
+        <form action="{{ url_for('adicionar_a_lista_de_desejos', produto_id=138) }}" method="POST">
+          <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+          <button type="submit" class="wishlist">Adicionar à Lista de Desejos</button>
+        </form>
+    </div>
+    <div class="produto-lancamento-mobile">
+      <a href="{{ url_for('exibir_produto', produto_id=139) }}">
+        <img src="{{ url_for('static', filename='TokyoGhoul.webp') }}" alt="Tokyo Ghoul Vol. 1">
+      </a>
+      <h4>Tokyo Ghoul Vol. 1</h4>
+      <br>
+      <p>R$ 34,70</p>
+      <form action="{{ url_for('adicionar_ao_carrinho', produto_id=139) }}" method="POST">
+        <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+        <button class="add-carrinho">Adicionar ao Carrinho</button>
+        <form action="{{ url_for('adicionar_a_lista_de_desejos', produto_id=143) }}" method="POST">
+          <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+          <button type="submit" class="wishlist">Adicionar à Lista de Desejos</button>
+        </form>
+    </div>
+  </div>
+
+
+  <br>
+  <br>
+
+
+  <!-- Carrossel - 3itens - Manga -->
+
+  <h2 style="align-items: center;">Destaques</h2>
+  <br>
+  <div class="carrossel-3itens-manga-wrapper">
+    <div class="carrossel-3itens-manga-labels">
+      <h3 id="title"></h3>
+      <br>
+      <p id="text"></p>
+      <br>
+      <p id="price"></p>
+
+    </div>
+    <div class="carrossel-3itens-manga">
+      <button class="carrossel-flecha-Manga" id="prev-manga" style="left: 0;">&#10094;</button>
+      <div class="carrossel-3itens-manga-inner">
+      </div>
+      <button class="carrossel-flecha-Manga" id="next-manga" style="right: 0;">&#10095;</button>
+    </div>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
+    crossorigin="anonymous"></script>
+  <script src="{{ url_for('static', filename='world.js') }}"></script>
+</body>
+{% endblock %}

@@ -1,0 +1,843 @@
+
+
+
+/* Reset básico */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* Fonte padrão */
+body {
+  font-family: 'Poppins', sans-serif;
+}
+
+/* Navbar */
+.navbar {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  background-color: #2b2b2b;
+  padding: 10px 20px;
+  gap: 20px;
+  position: sticky;
+  top: 0;
+  z-index: 999;
+}
+
+/* Logo */
+.logo {
+  display: flex;
+  flex-direction: column;
+  align-items: end;
+  margin-right: 10px; 
+  flex: 1;
+}
+
+.logo-img {
+  width: 150px; 
+  height: 150px;
+  object-fit: contain;
+
+}
+
+/* Barra de pesquisa */
+ .search-bar {
+  display: flex;
+  width: 100%;
+  border-radius: 5px;
+  overflow: hidden;
+  align-items: stretch;
+}
+
+.search-bar-content{
+  display: none;
+  position: absolute; 
+  bottom: -300px; 
+  left: 0; 
+  right: 0;
+   height: 300px; 
+   z-index: 999999; 
+   background-color: white; 
+   width: 100%; 
+   top: 100%;
+}
+
+.search-bar input:focus + .search-bar-content {
+  display: block;
+}
+
+
+.search-input {
+  flex: 1;
+  padding: 12px 15px;
+  border: none;
+  outline: none;
+  color: white;
+  background-color: transparent;
+  font-size: 16px;
+  background-color: #444;
+}
+
+.search-input::placeholder {
+  color: #ccc;
+}
+
+.search-btn {
+  background-color: #555;
+  border: none;
+  color: white;
+  padding: 12px 20px;
+  cursor: pointer;
+  font-size: 18px;
+  transition: background-color 0.3s;
+}
+
+.search-btn:hover {
+  background-color: #666;
+}
+
+.search-icon {
+    width: 20px; 
+    height: 20px; 
+    object-fit: contain; 
+    filter: brightness(0) invert(1);
+  }
+
+#search-btn-mobile{
+  display: none;
+
+}
+
+#search-bar-mobile{
+  display: none;
+}
+
+.search-disable-mobile{
+  display: none !important;
+}
+
+/* Ícones */
+.icons {
+  display: flex;
+  align-items: center;
+  margin-left: 15px;
+  flex: 1;
+  gap: 3px;
+}
+
+.icon {
+  margin-left: 10px;
+}
+
+.icon-img {
+  width: 28px;
+  height: 28px;
+  cursor: pointer;
+  transition: transform 0.3s ease, opacity 0.3s ease;
+  filter: brightness(0) invert(1);
+}
+
+.icon-img:hover {
+  transform: scale(1.1);
+  opacity: 0.8;
+}
+
+/* Dropdown para perfil */
+.dropdown-profile {
+  position: relative;
+}
+
+.dropdown-profile:hover .dropdown-content {
+  display: block;
+}
+
+.dropdown-content {
+  display: none;
+  position: absolute;
+  top: 100%;
+  right: 0;
+  background-color: #444;
+  border-radius: 5px;
+  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.2);
+  min-width: 120px;
+}
+
+.dropdown-content a {
+  display: block;
+  color: white;
+  text-decoration: none;
+  padding: 10px;
+  font-family: 'Roboto', sans-serif;
+  font-size: 14px;
+  transition: background-color 0.3s;
+}
+
+.dropdown-content a:hover {
+  background-color: #555;
+}
+
+/* Links da navbar */
+.nav-links {
+  list-style: none;
+  display: flex;
+  justify-content: center;
+  background-color: #2b2b2b;
+  padding: 10px 0;
+}
+
+.nav-links li {
+  margin: 0 10px;
+  position: relative; 
+}
+
+.nav-links a {
+  font-family: 'Roboto', sans-serif;
+  font-weight: 500;
+  font-size: 16px;
+  color: white;
+  text-decoration: none;
+  padding: 8px 15px;
+  transition: background 0.3s;
+}
+
+.nav-links a:hover {
+  background-color: #555;
+  border-radius: 5px;
+}
+
+/* Dropdown específico do Comics */
+.dropdown {
+  position: relative;
+}
+
+.dropdown .dropdown-content {
+  display: none;
+  position: absolute;
+  top: 100%;
+  left: 0;
+  background-color: #444;
+  border-radius: 5px;
+  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.2);
+  z-index: 1000;
+}
+
+.dropdown .dropdown-content li {
+  margin: 0;
+  list-style: none;
+}
+
+.dropdown .dropdown-content a {
+  padding: 10px 15px;
+  display: block;
+  color: white;
+  font-family: 'Roboto', sans-serif;
+  text-decoration: none;
+  transition: background-color 0.3s;
+}
+
+.dropdown .dropdown-content a:hover {
+  background-color: #555;
+}
+
+/* Exibição do dropdown ao passar o mouse */
+.dropdown:hover .dropdown-content {
+  display: block;
+}
+
+/* Responsividade */
+.menu-toggle {
+  display: none;
+  font-size: 28px;
+  color: white;
+  cursor: pointer;
+}
+
+/* Carrossel  - 1*/
+
+.carousel {
+  display: flex;
+  overflow: hidden;
+  width: 100%;
+  height: auto;
+  position: relative;
+}
+
+.carousel img {
+  width: 100%;
+  height: auto;
+  object-fit: cover;
+  flex-shrink: 0;
+}
+
+.carousel-container {
+  display: flex;
+  transition: transform 0.5s ease-in-out;
+  width: 300%;
+}
+
+.carousel-buttons {
+  position: absolute;
+  top: 50%;
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  transform: translateY(-50%);
+  z-index: 1;
+}
+
+.carousel-button {
+  background: rgba(0, 0, 0, 0.5);
+  border: none;
+  color: white;
+  padding: 10px 20px;
+  cursor: pointer;
+  font-size: 1.5rem;
+  border-radius: 5px;
+}
+
+.carousel-button:hover {
+  background: rgba(0, 0, 0, 0.7);
+}
+
+
+/* grid */
+
+.grid-container {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 20px; 
+  margin: 40px auto; 
+  padding: 10px; 
+  max-width: 1200px;
+}
+
+.grid-item {
+  color: white;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 15px;
+  transition: transform 0.3s, box-shadow 0.3s; 
+}
+
+.grid-item:hover {
+  transform: scale(1.05); 
+
+}
+
+
+.grid-item img {
+  max-width: 100%;
+  height: auto;
+  object-fit: cover; 
+}
+
+/* segundo carrossel */
+
+.carrossel {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  margin: 20px 0;
+  width: 100%;
+  padding: 0 12%;
+  gap: 30px;
+}
+  .carrossel-mobile{
+    display: none;
+  }
+
+  .product-item-mobile{
+    min-width: 250px;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    height: 100%;
+    align-items: center;
+  }
+
+  .product-item-mobile > img{
+    height: 100%;
+    object-fit: contain;
+    width: 100%;
+    max-height: 300px;
+  }
+
+   .carrossel-wrapper{
+    display: flex;  
+     width: 100%;
+     overflow: hidden;
+  }
+
+.carousel-items {
+  display: flex;
+  width: 200%;
+  font-size: 14px;
+  transition: transform 0.5s ease-in-out;
+}
+
+.carousel-group {
+  display: flex;
+  width: 100%;
+  justify-content: stretch;
+  gap: 20px;
+  align-items: center;
+  min-width: 100%;
+  max-width: 100%;
+
+}
+
+.product-item {
+  text-align: center;
+  flex: 1;
+}
+
+.product-item img {
+  width: 100px;
+  height: 150px;
+  object-fit: cover;
+}
+
+.add-cart {
+  background-color: #E1AA16;
+  color: white;
+  border: none;
+  padding: 8px 16px; 
+  font-size: 14px;
+  border-radius: 4px; 
+  cursor: pointer;
+  margin-bottom: 10px; 
+  width: 100%; 
+  max-width: 250px; 
+}
+
+.wishlist {
+  background-color: white;
+  color: black;
+  border: 1px solid #ccc;
+  padding: 8px 16px;
+  font-size: 14px; 
+  border-radius: 4px; 
+  cursor: pointer;
+  width: 100%; 
+  max-width: 250px; 
+}
+
+
+.button-container {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start; 
+  gap: 10px; 
+}
+
+.carousel-arrow {
+  background: rgba(0, 0, 0, 0.5);
+  border: none;
+  color: white;
+  padding: 10px 20px;
+  cursor: pointer;
+  font-size: 1.5rem;
+  border-radius: 5px;
+  z-index: 99;
+}
+
+/* Efeito ao clicar na seta */
+.carousel-arrow:active {
+  transform: scale(0.9);
+  color: #E1AA16; 
+}
+
+/* Banner - Marvel - DC - WorldMangas */
+header {
+  width: 100%;
+  text-align: center;
+  background-color: #333;
+  color: white;
+  padding: 10px 0;
+}
+
+.menu {
+  list-style: none;
+  padding: 0;
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+  margin: 0;
+}
+
+.menu li {
+  cursor: pointer;
+  padding: 10px 15px;
+  background-color: #444;
+  border-radius: 5px;
+  color: white;
+  transition: background-color 0.3s;
+}
+
+.menu li:hover {
+  background-color: #444;
+}
+
+/* Banner principal */
+.banner {
+  position: relative;
+  width: 100%;
+  height: 250px; 
+  display: flex;
+  align-items: center; 
+  justify-content: center; 
+  overflow: hidden;
+}
+
+.banner-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover; 
+}
+
+/* Cards de HQs e Mangás */
+.cards {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 20px;
+  padding: 20px;
+  width: 100%;
+}
+
+
+.card {
+  background: #f4f4f4;
+  border-radius: 10px;
+  padding: 20px;
+  text-align: center;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  max-width: 200px;
+  flex: 1 1 calc(25% - 20px);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  gap: 10px;
+}
+
+
+
+.card p {
+  font-size: 16px;
+  margin: 10px 0;
+}
+
+.card h2 {
+  font-size: 16px;
+  color: #000000;
+}
+
+
+.card img {
+  width: 100%;
+  height: auto;
+  border-radius: 8px;
+  margin-bottom: 10px;
+}
+
+.card button {
+  background-color: #ffa500;
+  color: white;
+  border: none;
+  padding: 10px 15px;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.card button:hover {
+  background-color: #e69500;
+}
+
+/*  carrossel final pagina principal */
+.Carroussel {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  margin: 20px 0;
+  width: 100%;
+  padding: 0 12%;
+  gap: 30px;
+}
+  .Carroussel-mobile{
+    display: none;
+  }
+
+  .produto-item-mobile{
+    min-width: 250px;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    height: 100%;
+    align-items: center;
+  }
+
+  .produto-item-mobile > img{
+    height: 100%;
+    object-fit: contain;
+    width: 100%;
+    max-height: 300px;
+  }
+
+   .wrapper-carroussel{
+    display: flex;  
+     width: 100%;
+     overflow: hidden;
+  }
+
+  .itens-carrossel {
+  display: flex;
+  width: 200%;
+  font-size: 14px;
+  transition: transform 0.5s ease-in-out;
+}
+
+  .grupo-carrossel {
+  display: flex;
+  width: 100%;
+  justify-content: stretch;
+  gap: 20px;
+  align-items: center;
+  min-width: 100%;
+  max-width: 100%;
+}
+
+  .produto-item {
+  text-align: center;
+  flex: 1;
+}
+
+  .produto-item img {
+  width: 100px;
+  height: 150px;
+  object-fit: cover;
+}
+
+  .add-carrinho {
+  background-color: #E1AA16;
+  color: white;
+  border: none;
+  padding: 8px 16px;
+  font-size: 14px; 
+  border-radius: 4px; 
+  cursor: pointer;
+  margin-bottom: 10px; 
+  width: 100%;
+  max-width: 250px; 
+}
+
+  .desejos {
+  background-color: white;
+  color: black;
+  border: 1px solid #ccc;
+  padding: 8px 16px; 
+  font-size: 14px; 
+  border-radius: 4px; 
+  cursor: pointer;
+  width: 100%;
+  max-width: 250px;
+}
+
+
+  .button-container {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 10px; 
+}
+
+  .carrossel-flecha {
+  background: rgba(0, 0, 0, 0.5);
+  border: none;
+  color: white;
+  padding: 10px 20px;
+  cursor: pointer;
+  font-size: 1.5rem;
+  border-radius: 5px;
+  z-index: 99;
+}
+
+/* Efeito ao clicar na seta */
+.carrossel-flecha:active {
+  transform: scale(0.9); 
+  color: #E1AA16; 
+}
+
+.flash-message {
+  padding: 30px;
+  margin: 30px 0;
+  border-radius: 5px;
+  font-weight: bold;
+  text-align: center;
+  
+ 
+  position: fixed; 
+  top: 50%; 
+  left: 50%; 
+  transform: translate(-50%, -50%); 
+  z-index: 9999; 
+}
+
+.flash-message.success {
+  background-color: #d4edda;
+  color: #155724;
+}
+
+.flash-message.warning {
+  background-color: #fff3cd;
+  color: #856404;
+}
+
+
+
+  
+@media (max-width: 768px) {
+  .menu-toggle {
+    display: block;
+  }
+
+  .logo{
+    align-items: start;
+  }
+
+  .logo-img{
+    width: 100px;
+    height: 100px;
+  }
+
+  
+  .search-bar {
+    display: none;
+  }
+
+  #search-bar-mobile{
+    display: flex;
+    border-radius: 5px;
+    align-items: stretch;
+  }
+
+  .icons {
+    margin-left: 5px;
+  }
+
+  .nav-links {
+    flex-direction: column;
+    width: 100%;
+    display: none;
+  }
+
+  .active {
+    display: flex;
+  }
+
+  .nav-links li {
+    text-align: center;
+  }
+
+  .nav-links a {
+    padding: 10px;
+    width: 100%;
+  }
+ 
+  #search-btn-mobile{
+    display: block;
+}
+
+  .carousel-button {
+  font-size: 1rem;
+  padding: 8px 16px;
+  margin-bottom: 20px;
+}
+
+.carousel img {
+  width: 100%;
+  height: auto;
+  object-fit: contain;
+  flex-shrink: 0;
+  object-position: top;
+  
+}
+
+.grid-container {
+  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); 
+  gap: 15px;
+}
+
+.grid-item {
+  padding: 10px;
+} 
+
+/* segundo carrossel */
+
+.carrossel-mobile{
+  display: flex;
+  gap: 20px;
+  overflow-y: hidden;
+  overflow-x: auto;
+  flex-wrap: nowrap;
+  max-height: 450px;
+  padding: 0 20px;
+}
+
+.carrossel {
+  display: none;
+}
+
+.card {
+  flex: 1 1 calc(50% - 20px);
+  max-width: 100%;
+}
+.banner {
+  display: none;
+}
+/* carrossel final */
+
+.Carroussel-mobile{
+  display: flex;
+  gap: 20px;
+  overflow-y: hidden;
+  overflow-x: auto;
+  flex-wrap: nowrap;
+  max-height: 450px;
+  padding: 0 20px;
+}
+
+.Carroussel {
+  display: none;
+}
+
+
+
+}
+
+@media (max-width: 480px) {
+  .card {
+    flex: 1 1 calc(100% - 20px); 
+    max-width: 100%;
+  }
+  .card img {
+    width: 60%; 
+    height: auto; 
+    margin-bottom: 10px; 
+  }
+  .banner {
+    display: none; 
+}
+}
+
+
+

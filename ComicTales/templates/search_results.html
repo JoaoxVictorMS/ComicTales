@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <title>
+        {% if personagem %} 
+            Produtos de {{ personagem.nome }} 
+        {% else %} 
+            Resultados da Busca 
+        {% endif %}
+    </title>
+
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        h1 {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        .product-grid {
+            display: grid; 
+            grid-template-columns: repeat(5, 1fr); 
+            gap: 20px; 
+            justify-content: center; 
+        }
+
+        .product-item {
+            background-color: #fff;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            padding: 15px;
+            box-sizing: border-box;
+            text-align: center;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
+
+        .product-item img {
+            width: 100%;
+            height: 250px;
+            object-fit: cover;
+            border-bottom: 1px solid #ddd;
+            padding-bottom: 10px;
+            margin-bottom: 10px;
+            padding-left: 17px;
+            cursor: pointer;
+            transform: translateX(-5%);
+        }
+
+        .product-item h2 {
+            font-size: 1em;
+            margin: 10px 0;
+            color: #333;
+        }
+
+        .product-item p {
+            margin: 5px 0;
+            color: #666;
+        }
+
+        .product-item .price {
+            font-weight: bold;
+            color: #000000;
+            font-size: 1.1em;
+        }
+
+        .product-item .add-carrinho, .product-item .wishlist {
+            display: inline-block;
+            margin-top: 10px;
+            padding: 8px 16px;
+            text-decoration: none;
+            border: none;
+            border-radius: 5px;
+            transition: background-color 0.3s, color 0.3s;
+            cursor: pointer;
+            width: 100%;
+            box-sizing: border-box;
+            text-align: center;
+        }
+
+        .product-item .add-carrinho {
+            background-color: #E1AA16;
+            color: #fff;
+        }
+
+        .product-item .add-carrinho:hover {
+            background-color: #c5940e;
+        }
+
+        .product-item .wishlist {
+            background-color: #fff;
+            color: #000;
+            border: 1px solid #000;
+        }
+
+        .product-item .wishlist:hover {
+            background-color: #181818d8;
+            color: #fff;
+        }
+
+        .breadcrumb {
+            font-size: 14px;
+            color: #1a1a1a;
+            margin: 20px 0; 
+            background-color: #f4f4f4;
+            padding: 10px;
+            border-radius: 5px;
+            width: 100%; 
+        }
+
+        .breadcrumb a {
+            text-decoration: none;
+            color: #007bff;
+        }
+
+        .breadcrumb a:hover {
+            text-decoration: underline;
+        }
+
+        .breadcrumb span {
+            color: #333;
+        }
+
+        @media (max-width: 768px) {
+        .product-grid {
+            grid-template-columns: repeat(2, 1fr); 
+        }
+
+        .product-item img {
+            height: 200px; 
+        }
+    }
+
+    @media (max-width: 480px) {
+        .product-grid {
+            grid-template-columns: 1fr; 
+        }
+
+        .product-item {
+            padding: 10px; 
+        }
+
+        .breadcrumb {
+            font-size: 12px; 
+            padding: 5px;
+        }
+    }
+
+    </style>
+</head>
+<body>
+
+    {% include 'navbar.html' %}
+
+    <div class="container">
+
+        <div class="breadcrumb">
+            <a href="{{ url_for('index') }}">Home</a> &gt;
+            {% if personagem %}
+                <span>Produtos de: {{ personagem.nome }}</span>
+            {% else %}
+                <span>Resultados da Busca</span>
+            {% endif %}
+        </div>
+
+        <h1>
+            {% if personagem %}
+                Produtos de {{ personagem.nome }}
+            {% else %}
+                Resultados para a busca
+            {% endif %}
+        </h1>
+
+        {% if produtos %}
+            <div class="product-grid">
+                {% for produto in produtos %}
+                    <div class="product-item">
+                        <a href="{{ url_for('exibir_produto', produto_id=produto.id) }}">
+                            <img src="{{ url_for('static', filename=produto.imagem) }}" alt="{{ produto.titulo }}">
+                        </a>
+                        <h2>{{ produto.titulo }}</h2>
+                        <p class="price">R$ {{ produto.preco }}</p>
+                        <form action="{{ url_for('adicionar_ao_carrinho', produto_id=produto.id) }}" method="POST">
+                            <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+                            <button type="submit" class="add-carrinho">Adicionar ao Carrinho</button>
+                        </form>
+                        <form action="{{ url_for('adicionar_a_lista_de_desejos', produto_id=produto.id) }}" method="POST">
+                            <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+                            <button type="submit" class="wishlist">Adicionar à Lista de Desejos</button>
+                        </form>
+                    </div>
+                {% endfor %}
+            </div>
+        {% else %}
+            <p>Nenhum produto encontrado para 
+                {% if personagem %}
+                    "{{ personagem.nome }}"
+                {% else %}
+                    "{{ query }}"
+                {% endif %}
+            .</p>
+        {% endif %}
+    </div>
+
+    {% include 'footer.html' %}
+
+</body>
+</html>

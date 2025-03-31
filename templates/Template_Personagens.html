@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>{% if personagem %}{{ personagem.nome }}{% else %}Personagem Não Encontrado{% endif %}</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 10px; 
+        }
+
+        h1 {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        .produtos-container {
+            display: grid; 
+            grid-template-columns: repeat(3, 1fr); 
+            gap: 20px; 
+            padding: 20px; 
+            margin: 0 auto; 
+        }
+
+        .produto-item {
+            background-color: #fff;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            padding: 15px;
+            box-sizing: border-box;
+            text-align: center;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
+
+        .produto-item h3 {
+            font-size: 1em;
+            margin: 10px 0;
+            color: #333;
+        }
+
+        .produto-item p {
+            margin: 5px 0;
+            color: #666;
+        }
+
+        .produto-item .preco {
+            font-weight: bold;
+            color: #000000;
+            font-size: 1.1em;
+        }
+
+        .product-item .add-carrinho, .product-item .wishlist {
+           display: inline-block;
+           margin-top: 10px;
+           padding: 8px 16px;
+           text-decoration: none;
+           border: none;
+           border-radius: 5px;
+           transition: background-color 0.3s, color 0.3s;
+           cursor: pointer;
+           width: 100%;
+           box-sizing: border-box;
+           text-align: center;
+        }
+
+        .produto-item .add-carrinho:hover {
+            background-color: #c5940e;
+        }
+
+        .produto-item .wishlist:hover {
+            background-color: #181818d8;
+            color: #fff;
+        }
+
+        .breadcrumb {
+            font-size: 14px;
+            color: #1a1a1a;
+            margin-bottom: 20px;
+            text-align: right;
+            padding-right: 20px; 
+        }
+
+        .breadcrumb a {
+            text-decoration: none;
+            color: #007bff;
+        }
+
+        .breadcrumb a:hover {
+            text-decoration: underline;
+        }
+
+        .breadcrumb span {
+            color: #333;
+        }
+
+
+        .flash-message.success {
+            background-color: #d4edda;
+            color: #155724;
+        }
+
+        .flash-message.danger {
+            background-color: #fff3cd;
+            color: #ff0000;
+        }
+
+        .flash-message.warning {
+            background-color: #fff3cd;
+            color: #856404;
+        }
+    
+
+        
+        @media (max-width: 992px) {
+            .produtos-container {
+                grid-template-columns: repeat(2, 1fr); 
+            }
+        }
+
+        @media (max-width: 768px) {
+            .produtos-container {
+                grid-template-columns: 1fr; 
+            }
+
+            .breadcrumb {
+                text-align: center;
+                padding-right: 0; 
+            }
+        }
+
+        @media (max-width: 480px) {
+            .produto-item h3 {
+                font-size: 0.9em;
+            }
+
+            .produto-item .preco {
+                font-size: 1em;
+            }
+        }
+    </style>
+</head>
+<body>
+    {% include 'navbar.html' %}
+    {% with mensagens = get_flashed_messages(with_categories=true) %}
+        {% if mensagens %}
+        <div>
+            {% for categoria, mensagem in mensagens %}
+            <div class="flash-message {{ categoria }}">
+                {{ mensagem }}
+            </div>
+            {% endfor %}
+        </div>
+        {% endif %}
+    {% endwith %}
+    {% if personagem %}
+        <h1>Produtos de {{ personagem.nome }}</h1>
+
+        <div class="breadcrumb">
+            <a href="{{ url_for('index') }}">Home</a> &gt; 
+            <span>Produtos de: {{ personagem.nome }}</span>
+        </div>
+
+        <div class="produtos-container">
+            {% if produtos %}
+                {% for produto in produtos %}
+                    <div class="produto-item">
+                        <a href="{{ url_for('exibir_produto', produto_id=produto.id) }}">
+                            <img src="{{ url_for('static', filename=produto.imagem) }}" alt="{{ produto.titulo }}">
+                        </a>
+                        <h3>{{ produto.titulo }}</h3>
+                        <p class="preco">Preço: R$ {{ produto.preco }}</p>
+                        <form action="{{ url_for('adicionar_ao_carrinho', produto_id=produto.id) }}" method="POST">
+                            <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+                            <button type="submit" class="add-carrinho">Adicionar ao Carrinho</button>
+                        </form>
+                        <form action="{{ url_for('adicionar_a_lista_de_desejos', produto_id=produto.id) }}" method="POST">
+                            <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+                            <button type="submit" class="wishlist">Adicionar à Lista de Desejos</button>
+                        </form>
+                    </div>
+                {% endfor %}
+            {% else %}
+                <p>Nenhum produto encontrado para este personagem.</p>
+            {% endif %}
+        </div>
+    {% else %}
+        <h1>Personagem Não Encontrado</h1>
+    {% endif %}
+    {% include 'footer.html' %}
+</body>
+</html>

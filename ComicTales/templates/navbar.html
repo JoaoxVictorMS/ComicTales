@@ -1,0 +1,71 @@
+{% block content %}
+<nav class="navbar">
+  <div class="menu-toggle" id="mobile-menu">&#9776;</div>
+  <a href="{{ url_for('index_home') }}" class="logo">
+    <img src="{{ url_for('static', filename='ComicTales-Photoroom.png') }}" alt="Logo Comic Tales" class="logo-img">
+  </a>
+
+  <div style="display: flex; flex: 3; position: relative;">
+    <form id="search-form" class="search-bar" action="/search_results" method="get">
+      <input type="text" id="search-input" name="query" placeholder="O que você procura?" class="search-input" value="{{ query }}">
+      <button type="submit" class="search-btn">
+          <img src="{{ url_for('static', filename='search.png') }}" alt="Ícone de busca" class="search-icon">
+      </button>
+    </form>
+  </div>
+
+  <div class="icons">
+    <div class="icon" id="search-btn-mobile">
+      <img src="{{ url_for('static', filename='search.png') }}" alt="Ícone de busca" class="icon-img">
+    </div>
+    <a href="{{ url_for('lista_de_desejos') }}" class="icon">
+      <img src="{{ url_for('static', filename='heart.png') }}" alt="Ícone de coração" class="icon-img">
+    </a>
+    <a href="{{ url_for('carrinho') }}" class="icon">
+      <img src="{{ url_for('static', filename='shopping-cart.png') }}" alt="Ícone de carrinho" class="icon-img">
+    </a>    
+    <div class="dropdown-profile">
+      <a href="#cadastro" class="icon">
+        <img src="{{ url_for('static', filename='cadastro-login.png') }}" alt="Ícone de perfil" class="icon-img">
+      </a>
+      <div class="dropdown-content">
+        {% if session.get('usuario_logado') %}
+          <a href="{{ url_for('logout') }}">Logout</a>
+          <a href="{{ url_for('minha_conta') }}">Minha Conta</a>
+        {% else %}
+          <a href="{{ url_for('login') }}">Login</a>
+          <a href="{{ url_for('criar_conta') }}">Criar Conta</a>
+        {% endif %}
+      </div>
+    </div>
+  </div>
+</nav>
+<ul class="nav-links">
+  <li><a href="{{ url_for('livros') }}">Livros</a></li>
+  <li><a href="{{ url_for('world_mangas') }}">WorldMangás</a></li>
+  <li class="dropdown">
+    <a href="#comics" class="dropbtn">Comics</a>
+    <ul class="dropdown-content">
+      <li><a href="{{ url_for('dc') }}">DC</a></li>
+      <li><a href="{{ url_for('marvel') }}">Marvel</a></li>
+    </ul>
+  </li>
+  <li><a href="{{ url_for('template_lancamentos') }}">Lançamentos</a></li>
+</ul>
+<form id="search-bar-mobile" class="search-disable-mobile">
+  <input type="text" id="search-input-mobile" placeholder="O que você procura?" class="search-input">
+  <button type="submit" class="search-btn">
+    <img src="{{ url_for('static', filename='search.png') }}" alt="Ícone de busca" class="search-icon">
+  </button>
+</form>
+{% endblock %}
+
+<script>
+document.getElementById('search-form').addEventListener('submit', function(event) {
+    var query = document.getElementById('search-input').value.trim();
+    if (!query) {
+        event.preventDefault();  
+        alert('Por favor, digite algo para buscar.');
+    }
+});
+</script>

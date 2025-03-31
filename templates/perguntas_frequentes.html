@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Perguntas Frequentes</title>
+
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+            margin: 0;
+            padding: 0;
+            background-color: #f9f9f9;
+            color: #333;
+        }
+        main {
+            padding: 20px 40px;
+        }
+        h1 {
+            color: #222;
+            font-size: 28px;
+            margin-bottom: 20px;
+        }
+        ul {
+            list-style: none;
+            padding: 0;
+        }
+        ul li {
+            margin-bottom: 15px;
+            font-size: 16px;
+        }
+        ul li span {
+            font-weight: bold;
+            color: #000;
+        }
+        
+    </style>
+</head>
+<body>
+    <!-- Navbar -->
+    {% include 'navbar.html' %}
+    <main>
+        <h1>Perguntas Frequentes</h1>
+        <p>Conheça nossos <strong>PROCEDIMENTOS</strong> para atendê-lo de forma rápida e adequada:</p>
+        <ul>
+            <li><span>1 -</span> Seu pedido será processado <strong>SOMENTE APÓS O PAGAMENTO</strong> do boleto bancário ou <strong>APÓS DÉBITO EM CARTÃO DE CRÉDITO</strong>.</li>
+            <li><span>2 -</span> O boleto bancário poderá ser visualizado e impresso logo após sua confirmação de compra.</li>
+            <li><span>3 -</span> Após a confirmação do pagamento, o pedido terá o prazo de até <strong>3 dias úteis</strong> para manuseio.</li>
+            <li><span>4 - PRAZOS para recebimento após a postagem do pedido:</span>
+                <ul>
+                    <li><strong>Sedex:</strong> 5 a 7 dias úteis após manuseio.</li>
+                    <li><strong>Pac:</strong> 11 a 21 dias úteis após manuseio.</li>
+                    <li><strong>Impresso Registrado:</strong> 13 a 23 dias úteis após manuseio.</li>
+                </ul>
+            </li>
+        </ul>
+    </main>
+    <!-- Footer -->
+    {% include 'footer.html' %}
+</body>
+</html>

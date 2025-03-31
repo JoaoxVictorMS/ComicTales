@@ -1,0 +1,368 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gerenciar Produtos</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f7f7f7;
+            margin: 0;
+            padding: 0;
+        }
+
+        .wrapper {
+            display: flex;
+            flex-wrap: wrap;
+            width: 90%;
+            max-width: 1200px;
+            margin: 50px auto;
+            gap: 20px;
+            justify-content: center;
+            align-items: flex-start;
+            min-height: 100vh;
+        }
+
+        .container {
+            background-color: #fff;
+            flex-grow: 1;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+        }
+
+        h1 {
+            text-align: center;
+            color: #333;
+        }
+
+        form {
+            margin-bottom: 30px;
+        }
+
+        input,
+        textarea,
+        button {
+            display: block;
+            width: 100%;
+            margin-bottom: 15px;
+            padding: 10px;
+            font-size: 16px;
+        }
+
+        button {
+            background-color: #E1AA16;
+            color: #fff;
+            border: none;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #c29310;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        table,
+        th,
+        td {
+            border: 1px solid #ddd;
+        }
+
+        th,
+        td {
+            padding: 10px;
+            text-align: left;
+        }
+
+        img {
+            max-width: 100px;
+            height: auto;
+        }
+
+        .actions button {
+            margin-right: 10px;
+            padding: 5px 10px;
+        }
+
+        .edit {
+            background-color: #f39c12;
+            color: white;
+        }
+
+        .delete {
+            background-color: #e74c3c;
+            color: white;
+        }
+
+        .custom-div {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            background-color: white;
+            padding: 60px 40px;
+            max-width: 1050px;
+            width: 90%;
+            margin: 0 auto;
+            text-align: center;
+            border-radius: 15px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s, box-shadow 0.3s;
+
+        }
+
+        .custom-div:hover {
+            transform: scale(1.02);
+            box-shadow: 0 8px 16px rgba(20, 20, 20, 0.671);
+            padding-bottom: 40px;
+            padding-top: 50px;
+        }
+
+        .custom-div h2 {
+            font-size: 20px;
+            color: #333;
+            margin-bottom: 10px;
+        }
+
+        .custom-div p {
+            font-size: 16px;
+            color: #666;
+            margin-bottom: 15px;
+        }
+
+        .logout-btn {
+            background-color: #ff4b5c;
+            color: white;
+            font-size: 16px;
+            padding: 12px 25px;
+            border-radius: 30px;
+            text-decoration: none;
+            display: inline-block;
+            transition: background-color 0.3s, transform 0.2s, box-shadow 0.3s;
+            text-align: center;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            margin-top: auto;
+        }
+
+        .logout-btn:hover {
+            background-color: #a71e1e;
+            transform: scale(1.05);
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
+        }
+
+        .logout-btn:focus {
+            outline: none;
+        }
+
+        .logout-btn:active {
+            background-color: #000000;
+            transform: scale(0.98);
+            box-shadow: 0 3px 6px rgba(0, 0, 0, 0.2);
+        }
+
+        .file-input-wrapper {
+    position: relative;
+    display: inline-block;
+}
+
+
+.custom-file-label {
+    display: inline-block;
+    padding: 10px 20px;
+    font-size: 16px;
+    font-weight: bold;
+    background-color: #4CAF50; 
+    color: white;
+    border: 2px solid #4CAF50; 
+    border-radius: 5px; 
+    cursor: pointer;
+    transition: background-color 0.3s, border-color 0.3s; 
+}
+
+
+.custom-file-label:hover {
+    background-color: #45a049; 
+    border-color: #45a049;
+}
+
+
+input[type="file"] {
+    display: none;
+}
+
+        .flash-message.success {
+            background-color: #d4edda;
+            color: #155724;
+        }
+
+        .flash-message.danger {
+            background-color: #fff3cd;
+            color: #ff0000;
+        }
+
+        .flash-message.warning {
+            background-color: #fff3cd;
+            color: #856404;
+        }
+
+        @media screen and (max-width: 768px) {
+            .wrapper {
+                width: 100%;
+                margin: 20px auto;
+            }
+
+            .container {
+                padding: 15px;
+            }
+
+            table,
+            th,
+            td {
+                font-size: 14px;
+            }
+
+            .custom-div {
+                padding: 40px 20px;
+            }
+
+            input,
+            textarea,
+            button {
+                font-size: 14px;
+            }
+        }
+
+        @media screen and (max-width: 480px) {
+            table {
+                font-size: 12px;
+            }
+
+            img {
+                max-width: 80px;
+            }
+
+            button {
+                font-size: 14px;
+                padding: 8px;
+            }
+        }
+
+        .flash-message.success {
+            background-color: #d4edda;
+            color: #155724;
+        }
+
+        .flash-message.danger {
+            background-color: #fff3cd;
+            color: #ff0000;
+        }
+
+        .flash-message.warning {
+            background-color: #fff3cd;
+            color: #856404;
+        }
+    
+
+    </style>
+</head>
+
+<body>
+    {% with mensagens = get_flashed_messages(with_categories=true) %}
+        {% if mensagens %}
+        <div>
+            {% for categoria, mensagem in mensagens %}
+            <div class="flash-message {{ categoria }}">
+                {{ mensagem }}
+            </div>
+            {% endfor %}
+        </div>
+        {% endif %}
+    {% endwith %}
+
+
+
+    <div class="custom-div">
+        <h2>Bem-vindo ao painel de administração</h2>
+        <p>Você está conectado como administrador.</p>
+        <a href="{{ url_for('logout_admin') }}" class="logout-btn">Logout</a>
+    </div>
+
+
+
+
+    <div class="wrapper">
+        <div class="container">
+            <h1>Gerenciar Produtos</h1>
+
+            <!-- Formulário para adicionar produtos -->
+            <form method="POST" action="/produtos/adicionar" enctype="multipart/form-data">
+                <!-- CSRF Token -->
+                <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+                <input type="text" name="nome" placeholder="Título do Produto" required>
+                <textarea name="descricao" placeholder="Sinopse do Produto" required></textarea>
+                <input type="number" name="preco" placeholder="Preço" required>
+                <div class="file-input-wrapper">
+                    <label for="file-upload" class="custom-file-label">Escolha uma imagem</label>
+                    <input id="file-upload" type="file" name="imagem" accept="image/*" required>
+                </div>
+                <br>
+                <br>
+                <button type="submit">Adicionar Produto</button>
+            </form>
+
+            <!-- Lista de produtos -->
+            <table>
+                <thead>
+                    <tr>
+                        <th>Imagem</th>
+                        <th>Título</th>
+                        <th>Sinopse</th>
+                        <th>Preço</th>
+                        <th>Ações</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for produto in produtos %}
+                    <tr>
+                        <td>
+                            {% if produto.imagem and produto.imagem.startswith('uploads/') %}
+                            
+                            
+                            <img src="{{ url_for('static', filename=produto.imagem) }}" alt="Imagem do Produto"
+                                style="width: 100px; height: auto;">
+                            {% else %}
+                         
+                            
+                            <img src="{{ url_for('static', filename='/' + produto.imagem) }}" alt="Imagem do Produto"
+                                style="width: 100px; height: auto;">
+                            {% endif %}
+                        </td>
+                        <td>{{ produto.titulo }}</td>
+                        <td>{{ produto.sinopse }}</td>
+                        <td>R$ {{ produto.preco }}</td>
+                        <td class="actions">
+                            <!-- Editar Produto -->
+                            <form method="POST" action="/produtos/editar/{{ produto.id }}" style="display: inline;">
+                                <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+                                <button class="edit">Editar</button>
+                            </form>
+                            <!-- Excluir Produto -->
+                            <form method="POST" action="/produtos/excluir/{{ produto.id }}" style="display: inline;">
+                                <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+                                <button class="delete">Excluir</button>
+                            </form>
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+</body>
+</html>

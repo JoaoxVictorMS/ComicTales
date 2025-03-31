@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Página de Cadastro</title>
+    <link rel="icon" type="image/x-icon"
+        href="https://images-wixmp-ed30a86b8c4ca887773594c2.wixmp.com/f/4b38e295-09a1-4946-a23d-0d802264be82/df6p3fp-5ef742b7-5ab6-4f8f-9c37-ce9339f7526e.jpg?token=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1cm46YXBwOjdlMGQxODg5ODIyNjQzNzNhNWYwZDQxNWVhMGQyNmUwIiwiaXNzIjoidXJuOmFwcDo3ZTBkMTg4OTgyMjY0MzczYTVmMGQ0MTVlYTBkMjZlMCIsIm9iaiI6W1t7InBhdGgiOiJcL2ZcLzRiMzhlMjk1LTA5YTEtNDk0Ni1hMjNkLTBkODAyMjY0YmU4MlwvZGY2cDNmcC01ZWY3NDJiNy01YWI2LTRmOGYtOWMzNy1jZTkzMzlmNzUyNmUuanBnIn1dXSwiYXVkIjpbInVybjpzZXJ2aWNlOmZpbGUuZG93bmxvYWQiXX0.ReuJZM2TNB3XlTj5FPY8F2XLZES_YKkkZv9cfgM7Fu8">
+    <!-- Link para o Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&family=Roboto:wght@400;500&display=swap"
+        rel="stylesheet">
+
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-image: url(/static/image.png);
+            background-size: cover;
+            background-position: center;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            flex-direction: column;
+        }
+
+        .navbar {
+            width: 100%;
+            height: 60px;
+            background-color: rgba(0, 0, 0, 0.8);
+            position: fixed;
+            top: 0;
+            left: 0;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 20px;
+            box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.5);
+            z-index: 1000;
+        }
+
+        .container {
+            width: 90%;
+            max-width: 400px;
+            padding: 20px;
+            background: rgba(43, 43, 43, 0.86);
+            border-radius: 15px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.6);
+            margin-top: 100px;
+        }
+
+        h1 {
+            color: #fff;
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        .form-group {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-bottom: 15px;
+        }
+
+        .form-group label {
+            width: 100%;
+            font-size: 14px;
+            margin-bottom: 5px;
+            color: #fff;
+        }
+
+        .form-group input,
+        .form-group select {
+            flex: 1;
+            padding: 10px;
+            font-size: 14px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            width: 100%;
+        }
+
+        .form-group .half {
+            flex: 1 1 calc(50% - 10px);
+        }
+
+
+        button,
+        .btn {
+            width: 100%;
+            padding: 10px;
+            background: #E1AA16;
+            color: white;
+            font-size: 16px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        button:hover,
+        .btn:hover {
+            background: #d19914;
+        }
+
+        
+        .btn-voltar {
+            display: inline-block;
+            width: 100%;
+            padding: 10px;
+            background: #E1AA16;
+            color: white;
+            font-size: 16px;
+            border: none;
+            border-radius: 5px;
+            text-align: center;
+            text-decoration: none;
+        }
+
+        .btn-voltar:hover {
+            background: #d19914;
+        }
+
+        p {
+            color: #fff;
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+       
+        @media (max-width: 600px) {
+            .form-group .half {
+                flex: 1 1 100%;
+            }
+
+            h1 {
+                font-size: 20px;
+            }
+
+            button,
+            .btn {
+                font-size: 14px;
+            }
+        }
+
+        .logo-container {
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            z-index: 1000;
+        }
+
+        .logo {
+            width: 150px;
+            height: auto;
+            cursor: pointer;
+        }
+
+        .form-group.buttons {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            
+        }
+    </style>
+
+
+
+</head>
+
+<body>
+    {% with mensagens = get_flashed_messages(with_categories=true) %}
+        {% if mensagens %}
+        <div>
+            {% for categoria, mensagem in mensagens %}
+            <div class="flash-message {{ categoria }}">
+                {{ mensagem }}
+            </div>
+            {% endfor %}
+        </div>
+        {% endif %}
+    {% endwith %}
+    <div class="logo-container">
+        <a href="{{ url_for('index_home') }}">
+            <img src="{{ url_for('static', filename='ComicTales-Photoroom.png') }}" alt="Comictales Logo" class="logo">
+        </a>
+    </div>
+    <div class="container">
+        <h1>Cadastro</h1>
+        <p>Cadastre-se com seu e-mail e senha:</p>
+        <p><small>Campos marcados com * são obrigatórios.</small></p>
+        <form method="POST" action="{{ url_for('criar_conta') }}">
+            {{ form.csrf_token }}
+
+            <div class="form-group inputBox">
+                {{ form.cpf.label(class="form-label") }}
+                {{ form.cpf(class="form-control") }}
+            </div>
+
+            <div class="form-group inputBox">
+                {{ form.email.label(class="form-label") }}
+                <input type="email" name="{{ form.email.name }}" value="{{ form.email.data }}" class="form-control" required>
+            </div>
+
+            <div class="form-group inputBox">
+                {{ form.senha.label(class="form-label") }}
+                {{ form.senha(class="form-control") }}
+            </div>
+
+            <div class="form-group inputBox">
+                {{ form.nome.label(class="form-label") }}
+                {{ form.nome(class="form-control") }}
+            </div>
+
+            <div class="form-group inputBox">
+                {{ form.sobrenome.label(class="form-label") }}
+                {{ form.sobrenome(class="form-control") }}
+            </div>
+
+            <div class="form-group inputBox">
+                {{ form.pais.label(class="form-label") }}
+                {{ form.pais(class="form-control") }}
+            </div>
+
+            <div class="form-group inputBox">
+                {{ form.mes_nascimento.label(class="form-label") }}
+                {{ form.mes_nascimento(class="form-control") }}
+            </div>
+
+            <div class="form-group inputBox">
+                {{ form.ano_nascimento.label(class="form-label") }}
+                {{ form.ano_nascimento(class="form-control") }}
+            </div>
+
+            <div class="form-group inputBox">
+                {{ form.sexo.label(class="form-label") }}
+                {{ form.sexo(class="form-control") }}
+            </div>
+
+            <div class="form-group buttons">
+                <!-- Botão Cadastrar -->
+                {{ form.cadastrar(class="btn") }}
+            </div>
+        </form>
+    </div>
+
+</body>
+
+</html>

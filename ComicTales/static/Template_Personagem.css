@@ -1,0 +1,101 @@
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f8f8f8;
+}
+
+.main-content h1 {
+    text-align: center;
+    font-family: 'Poppins', sans-serif;
+    font-weight: 600;
+    margin-top: 20px;
+    margin-bottom: 20px;
+    color: #333;
+}
+
+.produtos-dragonball {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 20px;
+}
+
+.produto-dragonball {
+    background-color: #fff;
+    padding: 15px;
+    text-align: center;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    border-radius: 5px;
+}
+
+.produto-dragonball img { 
+    width: 150px;
+    height: 250px;
+    object-fit: cover;
+    }
+
+
+.product h3 {
+    font-size: 18px;
+    margin: 10px 0;
+}
+
+.product .price {
+    font-size: 18px;
+    color: #333;
+    margin: 10px 0;
+}
+
+.add-carrinho-dragonball {
+    background-color: #E1AA16;
+    color: white;
+    border: none;
+    padding: 8px 16px;
+    font-size: 14px;
+    border-radius: 4px;
+    cursor: pointer;
+    margin-bottom: 10px;
+    width: 100%;
+    max-width: 250px;
+}
+
+.wishlist-dragonball {
+    background-color: white;
+    color: black;
+    border: 1px solid #ccc;
+    padding: 8px 16px;
+    font-size: 14px;
+    border-radius: 4px;
+    cursor: pointer;
+    width: 100%;
+    max-width: 250px;
+}
+
+.tag {
+    background-color: #ffc107;
+    color: #fff;
+    font-size: 12px;
+    padding: 3px 8px;
+    border-radius: 3px;
+    display: inline-block;
+    margin-bottom: 10px;
+}
+
+
+@media (max-width: 768px) {
+    .produtos-dragonball {
+        grid-template-columns: repeat(2, 1fr);
+    }
+    .produto-dragonball:last-child {
+        margin-left: auto;
+        margin-right: auto;
+        text-align: center; 
+    }
+}
+
+
+@media (max-width: 480px) {
+    .produtos-dragonball {
+        grid-template-columns: 1fr;
+    }
+}

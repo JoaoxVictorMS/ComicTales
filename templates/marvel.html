@@ -1,0 +1,474 @@
+{% extends "base.html" %}
+{% block title %}ComicTales - Marvel{% endblock %}
+{% block content %}
+
+<body>
+  <div class="banner-container-Marvel">
+    <!-- Primeiro banner -->
+    <div class="banner-marvel">
+      <img src=" {{ url_for('static', filename='MarvelBanner.webp') }}" alt="Primeiro Banner"
+        class="responsive-banner-marvel">
+    </div>
+
+    <!-- Segundo banner -->
+    <div class="banner-marvel">
+      <img src="{{ url_for('static', filename='MarvelBanner2.jpg') }}" alt="Segundo Banner"
+        class="responsive-banner-marvel">
+    </div>
+  </div>
+
+  <br>
+  <br>
+  <br>
+
+  <h2 style="align-items: center;">Personagens</h2>
+
+  <br>
+
+  <div class="carrosselMarvel">
+    <button class="carrossel-flecha-marvel" id="prevMarvel">&#10094;</button>
+    <div class="carrossel-marvel-wrapper">
+      <div class="carrossel-marvel-itens">
+        <!-- Grupo 1 de itens -->
+        <div class="carrossel-marvel-grupo" id="group-1">
+          <div class="produto-marvel-item">
+            <a href="{{ url_for('exibir_personagem', personagem_url='homem-aranha') }}">
+              <img src="{{ url_for('static', filename='Spider-Man icon.jpeg') }}" alt="Homem-Aranha">
+            </a>
+            <h4>Homem-Aranha</h4>
+          </div>
+          <div class="produto-marvel-item">
+            <a href="{{ url_for('exibir_personagem', personagem_url='capitão-américa') }}">
+              <img src="{{ url_for('static', filename='Captain America icon.jpeg') }}" alt="Capitão América">
+            </a>
+            <h4>Capitão América</h4>
+          </div>
+          <div class="produto-marvel-item">
+            <a href="{{ url_for('exibir_personagem', personagem_url='ferro') }}">
+              <img src="{{ url_for('static', filename='HomemdeFerro.jpeg') }}" alt="Homem de Ferro">
+            </a>
+            <h4>Homem de Ferro</h4>
+          </div>
+          <div class="produto-marvel-item">
+            <a href="{{ url_for('exibir_personagem', personagem_url='hulk') }}">
+              <img src="{{ url_for('static', filename='Hulk.jpeg') }}" alt="Hulk">
+            </a>
+            <h4>Hulk</h4>
+          </div>
+          <div class="produto-marvel-item">
+            <a href="{{ url_for('exibir_personagem', personagem_url='thor') }}">
+              <img src="{{ url_for('static', filename='Thor icon.jpeg') }}" alt="Thor">
+            </a>
+            <h4>Thor</h4>
+          </div>
+        </div>
+        <!-- Grupo 2 de itens -->
+        <div class="carrossel-marvel-grupo" id="group-2">
+          <div class="produto-marvel-item">
+            <a href="{{ url_for('exibir_personagem', personagem_url='wolverine') }}"> 
+              <img src="{{ url_for('static', filename='Wolverine.jpeg') }}" alt="Wolverine">
+            </a>
+            <h4>Wolverine</h4>
+          </div>
+          <div class="produto-marvel-item">
+            <a href="{{ url_for('exibir_personagem', personagem_url='feiticeira-escarlate') }}">
+              <img src="{{ url_for('static', filename='FeiticeiraScarlate.jpeg') }}" alt="Feiticeira Escarlate">
+            </a>
+            <h4>Feiticeira Escarlate</h4>
+          </div>
+          <div class="produto-marvel-item">
+            <a href="{{ url_for('exibir_personagem', personagem_url='venom') }}" >
+              <img src="{{ url_for('static', filename='Venom.jpeg') }}" alt="Venom">
+            </a>
+            <h4>Venom</h4>
+          </div>
+          <div class="produto-marvel-item">
+            <a href="{{ url_for('exibir_personagem', personagem_url='viúva-negra') }}">
+              <img src="{{ url_for('static', filename='ViúvaNegra.jpeg') }}" alt="Viúva Negra">
+            </a>
+            <h4>Viúva Negra</h4>
+          </div>
+          <div class="produto-marvel-item">
+            <a href="{{ url_for('exibir_personagem', personagem_url='pantera-negra') }}">
+              <img src="{{ url_for('static', filename='PanteraNegra.jpeg') }}" alt="Pantera Negra">
+            </a>
+            <h4>Pantera Negra</h4>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <button class="carrossel-flecha-marvel" id="nextMarvel">&#10095;</button>
+  </div>
+
+  <br>
+
+  <!-- Carrossel Personagens Mobile -->
+  <div class="carrosselMarvel-mobile">
+    {% for personagem in personagens %}
+    <div class="produto-marvel-item-mobile">
+      <a href="{{ url_for('personagem', personagem_url=personagem.nome|replace(' ', '-')) }}" target="_blank">
+        <img src="{{ url_for('static', filename=personagem.nome|replace(' ', '-') ~ '.jpeg') }}"
+          alt="{{ personagem.nome }}">
+      </a>
+      <h4>{{ personagem.nome }}</h4>
+    </div>
+    {% endfor %}
+  </div>
+
+
+
+  <!-- Lançamentos -->
+
+
+  <h2 style="align-items: center;">Lançamentos</h2>
+  <br>
+  <br>
+  <div class="carrosselLancamentoMarvel">
+    <button class="carrossel-flecha-lancamento-marvel" id="prev-lancamento-marvel">&#10094;</button>
+    <div class="carrossel-lancamento-marvel-wrapper">
+      <div class="carrossel-lancamento-marvel-items">
+        <!-- Grupo 1 de itens -->
+        <div class="carrossel-lancamento-marvel-grupo" id="group-1">
+          <div class="produto-lancamento-marvel-items">
+            <a href="{{ url_for('exibir_produto', produto_id=242) }}">
+              <img src="{{ url_for('static', filename='X-Man.webp') }}" alt="X-Man Vol. 1">
+            </a>
+            <h4>
+              Era Do X-Man Vol. 1</h4>
+            <br>
+            <p>R$ 22,90</p>
+            <form action="{{ url_for('adicionar_ao_carrinho', produto_id=242) }}" method="POST">
+              <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+              <button class="add-carrinho">Adicionar ao Carrinho</button>
+            </form>
+            <form action="{{ url_for('adicionar_a_lista_de_desejos', produto_id=242) }}" method="POST">
+              <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+              <button type="submit" class="wishlist">Adicionar à Lista de Desejos</button>
+            </form>
+          </div>
+          <div class="produto-lancamento-marvel-items">
+            <a href="{{ url_for('exibir_produto', produto_id=243) }}">
+              <img src="{{ url_for('static', filename='Vingadores.webp') }}" alt="Vingadores">
+            </a>
+            <h4>Vingadores Por Geoff Johns Vol 1</h4>
+            <br>
+            <p>R$ 139,90</p>
+            <form action="{{ url_for('adicionar_ao_carrinho', produto_id=243) }}" method="POST">
+              <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+              <button class="add-carrinho">Adicionar ao Carrinho</button>
+            </form>
+            <form action="{{ url_for('adicionar_a_lista_de_desejos', produto_id=243) }}" method="POST">
+              <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+              <button type="submit" class="wishlist">Adicionar à Lista de Desejos</button>
+            </form>
+          </div>
+          <div class="produto-lancamento-marvel-items">
+            <a href="{{ url_for('exibir_produto', produto_id=244) }}">
+              <img src="{{ url_for('static', filename='MarvelZumbi.webp') }}" alt="Zumbi Marvel">
+            </a>
+            <h4>Zumbis Marvel (Marvel Essenciais)</h4>
+            <p>R$ 66,90</p>
+            <form action="{{ url_for('adicionar_ao_carrinho', produto_id=244) }}" method="POST">
+              <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+              <button class="add-carrinho">Adicionar ao Carrinho</button>
+            </form>
+            <form action="{{ url_for('adicionar_a_lista_de_desejos', produto_id=244) }}" method="POST">
+              <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+              <button type="submit" class="wishlist">Adicionar à Lista de Desejos</button>
+            </form>
+          </div>
+          <div class="produto-lancamento-marvel-items">
+            <a href="{{ url_for('exibir_produto', produto_id=245) }}">
+              <img src="{{ url_for('static', filename='TheAmazing.webp') }}"
+                alt="O Espetacular Homem-Aranha Edição Definitiva Vol. 3">
+            </a>
+            <h4>O Espetacular Homem-Aranha Edição Definitiva Vol. 3</h4>
+            <p>R$ 221,90</p>
+            <form action="{{ url_for('adicionar_ao_carrinho', produto_id=245) }}" method="POST">
+              <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+              <button class="add-carrinho">Adicionar ao Carrinho</button>
+            </form>
+            <form action="{{ url_for('adicionar_a_lista_de_desejos', produto_id=245) }}" method="POST">
+              <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+              <button type="submit" class="wishlist">Adicionar à Lista de Desejos</button>
+            </form>
+          </div>
+          <div class="produto-lancamento-marvel-items">
+            <a href="{{ url_for('exibir_produto', produto_id=246) }}">
+              <img src="{{ url_for('static', filename='Demolidor.webp') }}" alt="Demolidor: A Queda De Murdock">
+            </a>
+            <h4>Demolidor: A Queda De Murdock</h4>
+            <br>
+            <p>R$ 100,90</p>
+            <form action="{{ url_for('adicionar_ao_carrinho', produto_id=246) }}" method="POST">
+              <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+              <button class="add-carrinho">Adicionar ao Carrinho</button>
+            </form>
+            <form action="{{ url_for('adicionar_a_lista_de_desejos', produto_id=246) }}" method="POST">
+              <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+              <button type="submit" class="wishlist">Adicionar à Lista de Desejos</button>
+            </form>
+          </div>
+        </div>
+        <!-- Grupo 2 de itens -->
+        <div class="carrossel-lancamento-marvel-grupo" id="group-2">
+          <div class="produto-lancamento-marvel-items">
+            <a href="{{ url_for('exibir_produto', produto_id=247) }}">
+              <img src="{{ url_for('static', filename='MissMarvel.webp') }}" alt="Ms. Marvel Vol. 1: Kamala Khan">
+            </a>
+            <h4>Ms. Marvel Vol. 1: Kamala Khan</h4>
+            <br>
+            <p>R$ 34,90</p>
+            <form action="{{ url_for('adicionar_ao_carrinho', produto_id=247) }}" method="POST">
+              <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+            </form>
+            <button class="add-carrinho">Adicionar ao Carrinho</button>
+            <form action="{{ url_for('adicionar_a_lista_de_desejos', produto_id=247) }}" method="POST">
+              <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+              <button type="submit" class="wishlist">Adicionar à Lista de Desejos</button>
+            </form>
+          </div>
+          <div class="produto-lancamento-marvel-items">
+            <a href="{{ url_for('exibir_produto', produto_id=248) }}">
+              <img src="{{ url_for('static', filename='CaçadaSangrenta.webp') }}"
+                alt="Caçada Sangrenta: Filhos Da Meia-Noite">
+            </a>
+            <h4>Caçada Sangrenta: Filhos Da Meia-Noite</h4>
+            <p>R$ 36,90</p>
+            <form action="{{ url_for('adicionar_ao_carrinho', produto_id=248) }}" method="POST">
+              <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+              <button class="add-carrinho">Adicionar ao Carrinho</button>
+            </form>
+            <form action="{{ url_for('adicionar_a_lista_de_desejos', produto_id=248) }}" method="POST">
+              <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+              <button type="submit" class="wishlist">Adicionar à Lista de Desejos</button>
+            </form>
+          </div>
+          <div class="produto-lancamento-marvel-items">
+            <a href="{{ url_for('exibir_produto', produto_id=249) }}">
+              <img src="{{ url_for('static', filename='PequenosHerois.webp') }}" alt="Pequenos Heróis Marvel 01">
+            </a>
+            <h4>Pequenos Heróis Marvel 01</h4>
+            <br>
+            <p>R$ 9,90</p>
+            <form action="{{ url_for('adicionar_ao_carrinho', produto_id=249) }}" method="POST">
+              <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+              <button class="add-carrinho">Adicionar ao Carrinho</button>
+            </form>
+            <form action="{{ url_for('adicionar_a_lista_de_desejos', produto_id=249) }}" method="POST">
+              <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+              <button type="submit" class="wishlist">Adicionar à Lista de Desejos</button>
+            </form>
+          </div>
+          <div class="produto-lancamento-marvel-items">
+            <a href="{{ url_for('exibir_produto', produto_id=250) }}">
+              <img src="{{ url_for('static', filename='Surfista.webp') }}"
+                alt="Surfista Prateado Renascimento: Legado (Marvel Lendas)">
+            </a>
+            <h4>Surfista Prateado Renascimento: Legado (Marvel Lendas)</h4>
+            <p>R$ 31,90</p>
+            <form action="{{ url_for('adicionar_ao_carrinho', produto_id=250) }}" method="POST">
+              <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+              <button class="add-carrinho">Adicionar ao Carrinho</button>
+            </form>
+            <form action="{{ url_for('adicionar_a_lista_de_desejos', produto_id=250) }}" method="POST">
+              <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+              <button type="submit" class="wishlist">Adicionar à Lista de Desejos</button>
+            </form>
+          </div>
+          <div class="produto-lancamento-marvel-items">
+            <a href="{{ url_for('exibir_produto', produto_id=251) }}">
+              <img src="{{ url_for('static', filename='Cavaleiro.webp') }}" alt="A Vingança Do Cavaleiro Da Lua 01">
+            </a>
+            <h4>A Vingança Do Cavaleiro Da Lua 01</h4>
+            <p>R$ 29,90</p>
+            <form action="{{ url_for('adicionar_ao_carrinho', produto_id=251) }}" method="POST">
+              <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+              <button class="add-carrinho">Adicionar ao Carrinho</button>
+            </form>
+            <form action="{{ url_for('adicionar_a_lista_de_desejos', produto_id=251) }}" method="POST">
+              <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+              <button type="submit" class="wishlist">Adicionar à Lista de Desejos</button>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+    <button class="carrossel-flecha-lancamento-marvel" id="next-lancamento-marvel">&#10095;</button>
+  </div>
+
+
+  <!-- Carrossel Lançamentos Marvel Mobile -->
+
+
+  <div class="carrossel-lancamento-marvel-mobile">
+    <div class="produto-lancamento-marvel-mobile">
+      <a href="{{ url_for('exibir_produto', produto_id=242) }}">
+        <img src="{{ url_for('static', filename='X-Man.webp') }}" alt="X-Man Vol. 1">
+      </a>
+      <h4>Era Do X-Man Vol. 1</h4>
+      <br>
+      <p>R$ 22,90</p>
+      <form action="{{ url_for('adicionar_ao_carrinho', produto_id=242) }}" method="POST">
+        <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+        <button class="add-carrinho">Adicionar ao Carrinho</button>
+      </form>
+      <form action="{{ url_for('adicionar_a_lista_de_desejos', produto_id=242) }}" method="POST">
+        <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+        <button type="submit" class="wishlist">Adicionar à Lista de Desejos</button>
+      </form>
+    </div>
+    <div class="produto-lancamento-marvel-mobile">
+      <a href="{{ url_for('exibir_produto', produto_id=243) }}">
+        <img src="{{ url_for('static', filename='Vingadores.webp') }}" alt="Vingadores">
+      </a>
+      <h4>Vingadores Por Geoff Johns Vol 1</h4>
+      <br>
+      <p>R$ 139,90</p>
+      <form action="{{ url_for('adicionar_ao_carrinho', produto_id=243) }}" method="POST">
+        <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+        <button class="add-carrinho">Adicionar ao Carrinho</button>
+      </form>
+      <form action="{{ url_for('adicionar_a_lista_de_desejos', produto_id=243) }}" method="POST">
+        <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+        <button type="submit" class="wishlist">Adicionar à Lista de Desejos</button>
+      </form>
+    </div>
+    <div class="produto-lancamento-marvel-mobile">
+      <a href="{{ url_for('exibir_produto', produto_id=244) }}">
+        <img src="{{ url_for('static', filename='MarvelZumbi.webp') }}" alt="Zumbi Marvel">
+      </a>
+      <h4>Zumbis Marvel (Marvel Essenciais)</h4>
+      <p>R$ 66,90</p>
+      <form action="{{ url_for('adicionar_ao_carrinho', produto_id=244) }}" method="POST">
+        <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+        <button class="add-carrinho">Adicionar ao Carrinho</button>
+      </form>
+      <form action="{{ url_for('adicionar_a_lista_de_desejos', produto_id=244) }}" method="POST">
+        <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+        <button type="submit" class="wishlist">Adicionar à Lista de Desejos</button>
+      </form>
+    </div>
+    <div class="produto-lancamento-marvel-mobile">
+      <a href="{{ url_for('exibir_produto', produto_id=245) }}">
+        <img src="{{ url_for('static', filename='TheAmazing.webp') }}"
+          alt="O Espetacular Homem-Aranha Edição Definitiva Vol. 3">
+      </a>
+      <h4>O Espetacular Homem-Aranha Edição Definitiva Vol. 3</h4>
+      <br>
+      <p>R$ 221,90</p>
+      <form action="{{ url_for('adicionar_ao_carrinho', produto_id=245) }}" method="POST">
+        <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+        <button class="add-carrinho">Adicionar ao Carrinho</button>
+      </form>
+      <form action="{{ url_for('adicionar_a_lista_de_desejos', produto_id=245) }}" method="POST">
+        <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+        <button type="submit" class="wishlist">Adicionar à Lista de Desejos</button>
+      </form>
+    </div>
+    <div class="produto-lancamento-marvel-mobile">
+      <a href="{{ url_for('exibir_produto', produto_id=246) }}">
+        <img src="{{ url_for('static', filename='Demolidor.webp') }}" alt="Demolidor: A Queda De Murdock">
+      </a>
+      <h4>Demolidor: A Queda De Murdock</h4>
+      <br>
+      <p>R$ 100,90</p>
+      <form action="{{ url_for('adicionar_ao_carrinho', produto_id=246) }}" method="POST">
+        <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+        <button class="add-carrinho">Adicionar ao Carrinho</button>
+      </form>
+      <form action="{{ url_for('adicionar_a_lista_de_desejos', produto_id=246) }}" method="POST">
+        <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+        <button type="submit" class="wishlist">Adicionar à Lista de Desejos</button>
+      </form>
+    </div>
+    <div class="produto-lancamento-marvel-mobile">
+      <a href="{{ url_for('exibir_produto', produto_id=247) }}">
+        <img src="{{ url_for('static', filename='MissMarvel.webp') }}" alt="Ms. Marvel Vol. 1: Kamala Khan">
+      </a>
+      <h4>Ms. Marvel Vol. 1: Kamala Khan</h4>
+      <p>R$ 34,90</p>
+      <form action="{{ url_for('adicionar_ao_carrinho', produto_id=247) }}" method="POST">
+        <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+      </form>
+      <button class="add-carrinho">Adicionar ao Carrinho</button>
+      <form action="{{ url_for('adicionar_a_lista_de_desejos', produto_id=247) }}" method="POST">
+        <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+        <button type="submit" class="wishlist">Adicionar à Lista de Desejos</button>
+      </form>
+    </div>
+    <div class="produto-lancamento-marvel-mobile">
+      <a href="{{ url_for('exibir_produto', produto_id=248) }}">
+        <img src="{{ url_for('static', filename='CaçadaSangrenta.webp') }}"
+          alt="Caçada Sangrenta: Filhos Da Meia-Noite">
+      </a>
+      <h4>Caçada Sangrenta: Filhos Da Meia-Noite</h4>
+      <br>
+      <p>R$ 36,90</p>
+      <form action="{{ url_for('adicionar_ao_carrinho', produto_id=248) }}" method="POST">
+        <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+        <button class="add-carrinho">Adicionar ao Carrinho</button>
+      </form>
+      <form action="{{ url_for('adicionar_a_lista_de_desejos', produto_id=248) }}" method="POST">
+        <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+        <button type="submit" class="wishlist">Adicionar à Lista de Desejos</button>
+      </form>
+    </div>
+    <div class="produto-lancamento-marvel-mobile">
+      <a href="{{ url_for('exibir_produto', produto_id=249) }}">
+        <img src="{{ url_for('static', filename='PequenosHerois.webp') }}" alt="Pequenos Heróis Marvel 01">
+      </a>
+      <h4>Pequenos Heróis Marvel 01</h4>
+      <br>
+      <p>R$ 9,90</p>
+      <form action="{{ url_for('adicionar_ao_carrinho', produto_id=249) }}" method="POST">
+        <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+        <button class="add-carrinho">Adicionar ao Carrinho</button>
+      </form>
+      <form action="{{ url_for('adicionar_a_lista_de_desejos', produto_id=249) }}" method="POST">
+        <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+        <button type="submit" class="wishlist">Adicionar à Lista de Desejos</button>
+      </form>
+    </div>
+    <div class="produto-lancamento-marvel-mobile">
+      <a href="{{ url_for('exibir_produto', produto_id=250) }}">
+        <img src="{{ url_for('static', filename='Surfista.webp') }}"
+          alt="Surfista Prateado Renascimento: Legado (Marvel Lendas)">
+      </a>
+      <h4>Surfista Prateado Renascimento: Legado (Marvel Lendas)</h4>/
+      <br>
+      <p>R$ 31,90</p>
+      <form action="{{ url_for('adicionar_ao_carrinho', produto_id=250) }}" method="POST">
+        <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+        <button class="add-carrinho">Adicionar ao Carrinho</button>
+      </form>
+      <form action="{{ url_for('adicionar_a_lista_de_desejos', produto_id=250) }}" method="POST">
+        <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+        <button type="submit" class="wishlist">Adicionar à Lista de Desejos</button>
+      </form>
+    </div>
+    <div class="produto-lancamento-marvel-mobile">
+      <a href="{{ url_for('exibir_produto', produto_id=251) }}">
+        <img src="{{ url_for('static', filename='Cavaleiro.webp') }}" alt="A Vingança Do Cavaleiro Da Lua 01">
+      </a>
+      <h4>A Vingança Do Cavaleiro Da Lua 01</h4>
+      <br>
+      <p>R$ 29,90</p>
+      <form action="{{ url_for('adicionar_ao_carrinho', produto_id=251) }}" method="POST">
+        <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+        <button class="add-carrinho">Adicionar ao Carrinho</button>
+      </form>
+      <form action="{{ url_for('adicionar_a_lista_de_desejos', produto_id=251) }}" method="POST">
+        <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+        <button type="submit" class="wishlist">Adicionar à Lista de Desejos</button>
+      </form>
+    </div>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
+    crossorigin="anonymous"></script>
+  <script src="{{ url_for('static', filename='marvel.js') }}"></script>
+</body>
+{% endblock %}

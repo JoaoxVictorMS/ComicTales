@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Termos e Condições</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&family=Roboto:wght@400;500&display=swap"
+        rel="stylesheet">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+            margin: 0;
+            padding: 0;
+            background-color: #f9f9f9;
+            color: #333;
+            font-size: 14px; 
+        }
+        header {
+            background-color: #222;
+            padding: 10px 20px;
+            color: #fff;
+            text-align: left;
+            font-size: 18px; 
+        }
+        main {
+            padding: 20px 40px;
+        }
+        h1 {
+            font-size: 24px; 
+            color: #000;
+            text-align: left;
+            margin-bottom: 20px;
+        }
+        p, ul {
+            text-align: left;
+            margin: 10px 0;
+        }
+        ul li {
+            margin-bottom: 10px;
+            font-size: 14px; 
+        }
+        ul li span {
+            font-weight: bold;
+            color: #000;
+        }
+    </style>
+</head>
+<body>
+    <!-- Navbar -->
+    {% include 'navbar.html' %}
+    {% with mensagens = get_flashed_messages(with_categories=true) %}
+        {% if mensagens %}
+        <div>
+            {% for categoria, mensagem in mensagens %}
+            <div class="flash-message {{ categoria }}">
+                {{ mensagem }}
+            </div>
+            {% endfor %}
+        </div>
+        {% endif %}
+    {% endwith %}
+    <main>
+        <h1>Termos e Condições - Prazos de Entrega</h1>
+        <p>Conheça nossos <strong>PROCEDIMENTOS</strong> para atendê-lo de forma eficiente e transparente:</p>
+        <p>O envio dos nossos produtos é realizado por transportadoras ou pelos Correios, dependendo da faixa de CEP da sua região. Durante a finalização da compra, você poderá escolher uma das opções de prazos de entrega disponíveis para o endereço indicado. Também é possível comparar prazos e custos de frete para tomar a melhor decisão.</p>
+        
+        <h2>Condições:</h2>
+        <ul>
+            <li><span>1 – Processamento do Pedido:</span> O pedido será processado somente após a confirmação do pagamento.</li>
+            <li><span>2 – Pagamentos via Boleto Bancário:</span> Caso a opção de pagamento seja boleto bancário, é necessário considerar até 2 dias úteis adicionais para a compensação bancária.</li>
+            <li><span>3 – Manuseio e Preparação:</span> Após a confirmação do pagamento, o pedido terá até 3 dias úteis para ser separado e preparado para envio.</li>
+            <li><span>4 – Prazos de Entrega:</span> A entrega ocorre em dias úteis, dentro do horário comercial. Não realizamos entregas aos finais de semana e feriados, exceto em períodos de alta demanda, como Black Friday.</li>
+            <li><span>5 – Frete Grátis:</span> Disponível para compras acima de <strong>R$ 250,00</strong>.</li>
+            <li><span>6 – Promoções e Altas Demandas:</span> Durante promoções ou datas comemorativas, como Black Friday, os pedidos podem sofrer atrasos devido ao alto volume de compras.</li>
+            <li><span>7 – Entregas em Caixa Postal:</span> Não realizamos entregas em Caixa Postal para pedidos enviados por transportadora ou motoboy. Essa modalidade é válida apenas para entregas via Correios.</li>
+            <li><span>8 – Pedidos em Atraso:</span> Apesar de nosso esforço para cumprir os prazos, fatores como condições climáticas, trânsito, greves, acidentes ou alta demanda podem ocasionar atrasos.</li>
+            <li><span>9 – Cálculo de Frete:</span> O valor do frete varia de acordo com a região. Insira o CEP durante a compra para visualizar o custo e o prazo antes de finalizar o pedido.</li>
+            <li><span>10 – Entrega no Dia Seguinte (Next Day):</span> Disponível para compras com pagamento confirmado em dias úteis até às 12h, exclusivamente via PIX ou Cartão de Crédito. Consulte a disponibilidade para sua região antes de finalizar a compra. Essa modalidade não se aplica a pagamentos via boleto bancário.</li>
+            <li><span>11 – Alteração de Endereço:</span> O endereço de entrega pode ser alterado antes da finalização do pedido. Após a conclusão, não será possível realizar mudanças. Certifique-se de inserir o endereço correto antes de finalizar a compra.</li>
+            <li><span>12 – Local de Entrega:</span> Não realizamos transporte por escadas ou içamento externo. Em condomínios, as entregas são deixadas na portaria.</li>
+        </ul>
+        <p>Caso tenha dúvidas ou precise de suporte, entre em contato com o nosso SAC através de <strong>[faleconosco.comictales.com.br]</strong>. Trabalhamos para garantir a melhor experiência em suas compras!</p>
+    </main>
+    <!-- Footer -->
+    {% include 'footer.html' %}
+</body>
+</html>

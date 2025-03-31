@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ComicTales - Login</title>
+    <link rel="icon" type="image/x-icon" href="{{ url_for('static', filename='favicon.ico') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='bootstrap.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='app.css') }}">
+    <style>
+        body {
+            background-image: url("{{ url_for('static', filename='imagem.png') }}");
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            font-family: 'Poppins', sans-serif;
+            position: relative;
+            flex-direction: column; /* Alinha flash messages acima do login */
+        }
+
+        .login-container {
+            background-color: rgba(43, 43, 43, 0.9);
+            padding: 20px 40px;
+            border-radius: 15px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.7);
+            text-align: center;
+            max-width: 400px;
+            width: 100%;
+            z-index: 1; /* Garante que o login fique acima de qualquer outro conteúdo */
+        }
+
+        .login-container h1 {
+            margin-bottom: 20px;
+            color: #fff;
+        }
+
+        .login-container label {
+            color: #fff;
+            text-align: left;
+            display: block;
+            font-weight: bold;
+            margin-bottom: 5px;
+        }
+
+        .login-container .form-control {
+            border-radius: 10px;
+            margin-bottom: 15px;
+            padding: 10px;
+        }
+
+        .login-container button {
+            background-color: #E1AA16;
+            color: #fff;
+            border: none;
+            padding: 10px;
+            border-radius: 15px;
+            font-size: 16px;
+            cursor: pointer;
+            width: 100%;
+        }
+
+        .login-container button:hover {
+            background-color: #d19b14;
+        }
+
+        .login-container a {
+            color: #E1AA16;
+            text-decoration: none;
+        }
+
+        .login-container a:hover {
+            text-decoration: underline;
+        }
+
+        .logo-container {
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            z-index: 1000;
+        }
+
+        .logo {
+            width: 150px;
+            height: auto;
+            cursor: pointer;
+        }
+
+        .flash-message {
+            padding: 10px;
+            margin: 10px 0;
+            border-radius: 5px;
+            font-weight: bold;
+            text-align: center;
+            position: fixed;
+            top: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            z-index: 999;
+            max-width: 500px;
+            width: 90%;
+        }
+
+        .flash-message.success {
+            background-color: #d4edda;
+            color: #155724;
+        }
+
+        .flash-message.danger {
+            background-color: #fff3cd;
+            color: #ff0000;
+        }
+
+        .flash-message.warning {
+            background-color: #fff3cd;
+            color: #856404;
+        }
+    </style>
+</head>
+
+<body>
+
+    {% with mensagens = get_flashed_messages(with_categories=true) %}
+        {% if mensagens %}
+        <div>
+            {% for categoria, mensagem in mensagens %}
+            <div class="flash-message {{ categoria }}">
+                {{ mensagem }}
+            </div>
+            {% endfor %}
+        </div>
+        {% endif %}
+    {% endwith %}
+
+    <div class="logo-container">
+        <a href="{{ url_for('index_home') }}">
+            <img src="{{ url_for('static', filename='ComicTales-Photoroom.png') }}" alt="Comictales Logo" class="logo">
+        </a>
+    </div>
+    <div class="login-container">
+        <h1>Login</h1>
+        <form method="POST" action="{{ url_for('autenticar') }}">
+            <input type="hidden" name="proxima" value="{{ proxima }}">
+            <!-- Token do csrf -->
+            {{ form.csrf_token() }}
+            <div class="form-group">
+                {{ form.email.label(class_='form-label') }}
+                {{ form.email(class_='form-control') }}
+            </div>
+
+            <div class="form-group">
+                {{ form.senha.label(class_='form-label') }}
+                {{ form.senha(class_='form-control') }}
+            </div>
+
+            <button type="submit">Entrar</button>
+        </form>
+        <p>Ainda não tem uma conta? <a href="{{ url_for('criar_conta') }}">Crie uma.</a></p>
+        <p>É usuário admin? <a href="{{ url_for('login_admin') }}">Acesse aqui.</a></p>
+    </div>
+
+</body>
+
+</html>

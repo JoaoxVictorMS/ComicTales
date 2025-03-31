@@ -1,0 +1,373 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gerenciar Produtos</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f7f7f7;
+            margin: 0;
+            padding: 0;
+        }
+
+        .wrapper {
+            display: flex;
+            flex-wrap: wrap;
+            width: 90%;
+            max-width: 1200px;
+            margin: 50px auto;
+            gap: 20px;
+            justify-content: center;
+            align-items: flex-start;
+            min-height: 100vh;
+        }
+
+        .container {
+            background-color: #fff;
+            flex-grow: 1;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+        }
+
+        h1 {
+            text-align: center;
+            color: #333;
+        }
+
+        form {
+            margin-bottom: 30px;
+        }
+
+        input,
+        textarea,
+        button {
+            display: block;
+            width: 100%;
+            margin-bottom: 15px;
+            padding: 10px;
+            font-size: 16px;
+        }
+
+        button {
+            background-color: #E1AA16;
+            color: #fff;
+            border: none;
+            cursor: pointer;
+        }
+
+        .button:hover {
+            background-color: #c29310;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        table,
+        th,
+        td {
+            border: 1px solid #ddd;
+        }
+
+        th,
+        td {
+            padding: 10px;
+            text-align: left;
+        }
+
+        img {
+            max-width: 100px;
+            height: auto;
+        }
+
+        .actions button {
+            margin-right: 10px;
+            padding: 5px 10px;
+        }
+
+        .edit .edit {
+            background-color: #f39c12;
+            color: white;
+        }
+
+        .delete {
+            background-color: #e74c3c;
+            color: white;
+        }
+
+        .custom-div {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            background-color: white;
+            padding: 60px 40px;
+            max-width: 1050px;
+            width: 90%;
+            margin: 0 auto;
+            text-align: center;
+            border-radius: 15px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s, box-shadow 0.3s;
+
+        }
+
+        .custom-div:hover {
+            transform: scale(1.02);
+            box-shadow: 0 8px 16px rgba(20, 20, 20, 0.671);
+            padding-bottom: 40px;
+            padding-top: 50px;
+        }
+
+        .custom-div h2 {
+            font-size: 20px;
+            color: #333;
+            margin-bottom: 10px;
+        }
+
+        .custom-div p {
+            font-size: 16px;
+            color: #666;
+            margin-bottom: 15px;
+        }
+
+        .logout-btn {
+            background-color: #ff4b5c;
+            color: white;
+            font-size: 16px;
+            padding: 12px 25px;
+            border-radius: 30px;
+            text-decoration: none;
+            display: inline-block;
+            transition: background-color 0.3s, transform 0.2s, box-shadow 0.3s;
+            text-align: center;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            margin-top: auto;
+        }
+
+        .logout-btn:hover {
+            background-color: #a71e1e;
+            transform: scale(1.05);
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
+        }
+
+        .logout-btn:focus {
+            outline: none;
+        }
+
+        .logout-btn:active {
+            background-color: #000000;
+            transform: scale(0.98);
+            box-shadow: 0 3px 6px rgba(0, 0, 0, 0.2);
+        }
+
+        .voltar {
+            background-color: white;
+            color: black;
+            border: 1px solid #ccc;
+            font-size: 14px;
+            cursor: pointer;
+        }
+
+
+     
+     
+        .btn {
+    display: inline-block;
+    background-color: #3498db; 
+    color: white; 
+    font-size: 16px;
+    font-weight: bold;
+    padding: 12px 20px; 
+    border-radius: 30px; 
+    text-decoration: none; 
+    text-align: center; 
+    transition: background-color 0.3s, transform 0.2s, box-shadow 0.3s; 
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); 
+}
+
+.btn:hover {
+    background-color: #1d6fa5; 
+    transform: scale(1.05); 
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2); 
+}
+
+.btn:focus {
+    outline: none; 
+}
+
+.btn:active {
+    background-color: #104c6e; 
+    transform: scale(0.98); 
+    box-shadow: 0 3px 6px rgba(0, 0, 0, 0.2); 
+}
+
+
+.file-input-wrapper {
+    position: relative;
+    display: inline-block;
+}
+
+
+.custom-file-label {
+    display: inline-block;
+    padding: 10px 20px;
+    font-size: 16px;
+    font-weight: bold;
+    background-color: #4CAF50; 
+    color: white;
+    border: 2px solid #4CAF50; 
+    border-radius: 5px; 
+    cursor: pointer;
+    transition: background-color 0.3s, border-color 0.3s; 
+}
+
+
+.custom-file-label:hover {
+    background-color: #45a049; 
+    border-color: #45a049;
+}
+
+
+input[type="file"] {
+    display: none;
+}
+
+
+@media screen and (max-width: 768px) {
+    .btn {
+        font-size: 14px;
+        padding: 10px 16px; 
+    }
+}
+
+@media screen and (max-width: 480px) {
+    .btn {
+        font-size: 12px;
+        padding: 8px 12px; 
+    }
+}
+
+        @media (max-width: 768px) {
+        .wrapper {
+            width: 95%; 
+        }
+
+        .container {
+            padding: 15px;
+        }
+
+        h1 {
+            font-size: 24px; 
+        }
+
+        input,
+        textarea,
+        button {
+            font-size: 14px; 
+        }
+
+        .custom-div {
+            padding: 40px 20px;
+        }
+    }
+
+    @media (max-width: 480px) {
+        .wrapper {
+            flex-direction: column; 
+            gap: 10px;
+        }
+
+        .container {
+            width: 100%; 
+        }
+
+        input,
+        textarea,
+        button {
+            font-size: 12px; 
+            padding: 8px; 
+        }
+
+        .logout-btn {
+            font-size: 14px; 
+            padding: 10px 20px;
+        }
+
+        .custom-div {
+            padding: 30px 15px;
+        }
+
+        .custom-div h2 {
+            font-size: 18px; 
+        }
+
+        .custom-div p {
+            font-size: 14px;
+        }
+    }
+
+
+    .flash-message.success {
+            background-color: #d4edda;
+            color: #155724;
+        }
+
+        .flash-message.danger {
+            background-color: #fff3cd;
+            color: #ff0000;
+        }
+
+        .flash-message.warning {
+            background-color: #fff3cd;
+            color: #856404;
+        }
+    
+    </style>
+</head>
+
+<body>
+    {% with mensagens = get_flashed_messages(with_categories=true) %}
+        {% if mensagens %}
+        <div>
+            {% for categoria, mensagem in mensagens %}
+            <div class="flash-message {{ categoria }}">
+                {{ mensagem }}
+            </div>
+            {% endfor %}
+        </div>
+        {% endif %}
+    {% endwith %}
+    <div class="wrapper">
+        <div class="container">
+            <h1>Editar Produto</h1>
+
+            <!-- Formulário para editar produtos -->
+            <form method="POST" action="/produtos/editar/{{ produto.id }}" enctype="multipart/form-data">
+                
+                <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+                <input type="text" name="titulo" placeholder="Título do Produto" value="{{ produto.titulo }}" required>
+                <textarea name="sinopse" placeholder="Sinopse do Produto" required>{{ produto.sinopse }}</textarea>
+                <input type="number" name="preco" placeholder="Preço" value="{{ produto.preco }}" required>
+                <div class="file-input-wrapper">
+                    <label for="file-upload" class="custom-file-label">Escolha uma imagem</label>
+                    <input id="file-upload" type="file" name="imagem" accept="image/*">
+                </div>
+               <br>
+                <br>
+                
+                <button type="submit">Salvar alterações</button>
+            </form>
+
+            <!-- Botão para voltar à administração -->
+            <div style="margin-top: 20px;">
+                <a href="{{ url_for('gerenciar_produtos') }}" class="btn btn-secondary">Voltar à Administração</a>
+            </div>
+        </div>
+    </div>
+</body>

@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Política de Cookies</title>
+
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+            margin: 0;
+            padding: 0;
+            background-color: #f9f9f9;
+            color: #333;
+        }
+        
+        main {
+            padding: 20px 40px;
+        }
+        h1, h2 {
+            color: #444;
+        }
+        h1 {
+            font-size: 28px;
+        }
+        h2 {
+            font-size: 22px;
+            margin-top: 20px;
+        }
+        p, ul {
+            margin-bottom: 20px;
+        }
+        ul {
+            list-style: none;
+            padding: 0;
+        }
+        ul li {
+            margin-bottom: 10px;
+        }
+        ul li span {
+            font-weight: bold;
+            color: #000;
+        }
+       
+        a {
+            color: #0066cc;
+            text-decoration: none;
+        }
+        a:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+    <!-- Navbar -->
+    {% include 'navbar.html' %}
+    <main>
+        <h1>Política de Cookies</h1>
+        <p>
+            Em conformidade com a legislação europeia, a <strong>ComicTales</strong> tem o objetivo de garantir que cada usuário do site compreenda o que são os cookies e porque eles são usados, de modo que os usuários possam tomar decisões se desejam os cookies em seus dispositivos ou não.
+        </p>
+        <h2>O que são Cookies?</h2>
+        <p>
+            Um cookie é um pequeno arquivo de texto que contém um número de identificação único, transferido do site para o disco rígido do computador do usuário. Ele pode identificar o computador, mas não o usuário, e acompanha passivamente as atividades no site.
+        </p>
+        <h2>Categorias de Cookies</h2>
+        <ul>
+            <li><span>Cookies extremamente necessários:</span> Essenciais para mover-se pelo site e acessar áreas seguras, como login ou cestas de compras.</li>
+            <li><span>Cookies analíticos:</span> Coletam informações sobre o uso do site para melhorar sua funcionalidade. As informações são agregadas e anônimas.</li>
+            <li><span>Cookies de funcionalidade:</span> Permitem ao site lembrar escolhas do usuário, como idioma e região, proporcionando uma experiência mais personalizada.</li>
+        </ul>
+        <h2>Gerenciamento de Preferências de Cookies</h2>
+        <p>
+            A <strong>ComicTales</strong> permite aos usuários escolher se desejam receber cookies de terceiros ao navegar pelo site. Entretanto, negar ou excluir cookies pode limitar funcionalidades do site.
+        </p>
+        <p>
+            Consulte os seguintes links para gerenciar cookies em navegadores diferentes:
+            <ul>
+                <li><a href="#">Chrome</a></li>
+                <li><a href="#">Firefox</a></li>
+                <li><a href="#">Internet Explorer</a></li>
+                <li><a href="#">Safari</a></li>
+                <li><a href="#">Opera</a></li>
+            </ul>
+        </p>
+        <h2>Cookies de Terceiros</h2>
+        <p>
+            Alguns serviços de terceiros disponíveis no site podem definir cookies para fins publicitários. A <strong>ComicTales</strong> não se responsabiliza por cookies de terceiros ou seus conteúdos, e recomenda verificar suas políticas de privacidade.
+        </p>
+        <h2>Cookies Específicos</h2>
+        <ul>
+            <li><span>Google Analytics:</span> Usado para monitorar e melhorar o desempenho do site. Mais informações em: <a href="#">Google Privacy and Terms</a>.</li>
+            <li><span>Adobe Flash Cookies:</span> Usados para armazenar dados de mídia como vídeos.</li>
+            <li><span>YouTube:</span> Cookies definidos ao acessar conteúdo do YouTube em nosso site.</li>
+        </ul>
+        <p>
+            Continuando a navegação neste site, o usuário permite o uso de cookies e concorda com esta política de cookies.
+        </p>
+    </main>
+    <!-- Footer -->
+    {% include 'footer.html' %}
+</body>
+</html>

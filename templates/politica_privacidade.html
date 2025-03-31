@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Política de Privacidade</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+            margin: 0;
+            padding: 0;
+            background-color: #f9f9f9;
+            color: #333;
+        }
+        main {
+            padding: 20px 40px;
+        }
+        h1, h2 {
+            color: #000;
+        }
+        h1 {
+            font-size: 28px;
+            margin-bottom: 20px;
+        }
+        h2 {
+            font-size: 20px;
+            margin-top: 30px;
+        }
+        p {
+            margin: 10px 0;
+            text-align: justify;
+        }
+        ul {
+            list-style: none;
+            padding: 0;
+        }
+        ul li {
+            margin-bottom: 10px;
+            font-size: 14px;
+        }
+        ul li span {
+            font-weight: bold;
+            color: #000;
+        }
+        a {
+            color: #004080;
+            text-decoration: none;
+        }
+        a:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+    <!-- Navbar -->
+    {% include 'navbar.html' %}
+    <main>
+        <h1>Política de Privacidade</h1>
+        <h2>Resumo e Introdução:</h2>
+        <p>Este documento visa informar e estabelecer os critérios para coleta, tratamento, uso, disponibilização, armazenamento e descarte de dados pessoais dos usuários, em conformidade com a legislação aplicável.</p>
+        <p>Ao aceitar esta política de privacidade, você concorda expressamente com os termos aqui definidos. Sempre que enviar informações por meio de formulários ou navegar no site, a coleta, o uso e a divulgação dessas informações estarão autorizados. A ComicTales considera essencial a privacidade dos usuários de seus serviços e mantém o compromisso de informá-los sobre alterações ou novidades na política de privacidade e nos termos de uso, utilizando o e-mail fornecido para este fim.</p>
+        
+        <h2>Coleta de Dados:</h2>
+        <p>A ComicTales não exige o fornecimento de dados pessoais para a navegação nas seções principais do site. No entanto, algumas páginas oferecem funcionalidades exclusivas para usuários registrados.</p>
+        <ul>
+            <li><span>Dados Pessoais:</span> Incluem informações fornecidas durante compras, cadastros para promoções ou eventos, e no relacionamento com a empresa.</li>
+            <li><span>Informações Anônimas:</span> Referem-se a dados sobre hábitos de navegação e audiência, coletados para fins de métricas internas, sem identificar o usuário. Para mais detalhes, consulte nossa <a href="#">Política de Cookies</a>.</li>
+        </ul>
+        
+        <h2>1. Quando coletamos seus dados?</h2>
+        <p>A coleta ocorre de forma específica, dependendo do serviço utilizado. Cada ação pode resultar em diferentes dados coletados, armazenados ou compartilhados, conforme especificado no próximo item.</p>
+        
+        <h2>2. Quais informações são coletadas?</h2>
+        <ul>
+            <li>Ao se cadastrar para receber informações, promoções ou realizar compras, são coletados: nome, e-mail e data de nascimento.</li>
+            <li>Para compras no e-commerce, são requisitados: nome completo, CPF, telefone, endereço completo, e informações de pagamento.</li>
+            <li>Informações do cartão de crédito são processadas por plataformas seguras que utilizam tokenização.</li>
+        </ul>
+        
+        <h2>3. Prazo de armazenamento:</h2>
+        <p>Os dados serão armazenados enquanto forem necessários para a prestação do serviço ou conforme exigido por lei. Após o término do contrato ou assinatura, os dados podem ser mantidos por até cinco anos para eventuais demandas judiciais ou administrativas.</p>
+        
+        <h2>Política de Cookies:</h2>
+        <p>Ao aceitar a política de cookies da ComicTales, você autoriza o uso de dados de navegação para melhorar sua experiência e personalizar anúncios.</p>
+        
+        <h2>Tratamento de Dados de Crianças:</h2>
+        <ul>
+            <li>A ComicTales não coleta dados de menores de 12 anos.</li>
+            <li>Maiores de 12 anos podem adquirir produtos mediante consentimento dos responsáveis.</li>
+        </ul>
+        
+        <h2>Fusões ou Aquisições:</h2>
+        <p>Em caso de mudanças estruturais, como fusões ou aquisições, os dados pessoais poderão ser transferidos, sempre em conformidade com as leis de privacidade aplicáveis.</p>
+        
+        <h2>Segurança e Proteção de Dados:</h2>
+        <p>A ComicTales adota medidas rigorosas para proteger seus dados, como criptografia de comunicações, monitoramento interno e protocolos de segurança atualizados.</p>
+        
+        <h2>Contato com o Usuário:</h2>
+        <p>Entre em contato pelo nosso Serviço de Atendimento ao Cliente (SAC) através do link <a href="#">ComicTales/faleconosco</a>.</p>
+        
+        <h2>Disposições Gerais:</h2>
+        <p>Esta política pode ser atualizada a qualquer momento, e as alterações serão comunicadas por e-mail. Todas as questões jurídicas relacionadas a esta política são regidas pela legislação brasileira, com foro na Comarca de Catanduva – SP.</p>
+    </main>
+    <!-- Footer -->
+    {% include 'footer.html' %}
+</body>
+</html>

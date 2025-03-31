@@ -1,0 +1,272 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Checkout</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+      background-color: #f7f7f7;
+    }
+
+    .checkout-container {
+      width: 90%;
+      max-width: 600px;
+      margin: 20px auto;
+      background: #fff;
+      padding: 20px;
+      border-radius: 8px;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    }
+
+    h1,
+    h2 {
+      text-align: center;
+      color: #333;
+    }
+
+    .order-summary,
+    .customer-info,
+    .payment-method {
+      margin-bottom: 20px;
+    }
+
+    .item,
+    .total {
+      display: flex;
+      justify-content: space-between;
+      margin-bottom: 10px;
+    }
+
+    .total {
+      font-size: 1.2em;
+      font-weight: bold;
+      color: #000;
+    }
+
+    label {
+      margin-bottom: 5px;
+      color: #555;
+    }
+
+    input,
+    select {
+      width: 100%;
+      padding: 10px;
+      margin-bottom: 15px;
+      border: 1px solid #ddd;
+      border-radius: 5px;
+    }
+
+    input[type="radio"] {
+      margin-right: 10px;
+    }
+
+    .payment-option {
+      margin-bottom: 10px;
+    }
+
+    button {
+      width: 100%;
+      padding: 15px;
+      background: #E1AA16;
+      color: #fff;
+      font-size: 1em;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      transition: background 0.3s ease;
+    }
+
+    button:hover {
+      background: #c4930e;
+    }
+
+    @media (max-width: 480px) {
+      .item,
+      .total {
+        flex-direction: column;
+        align-items: center;
+      }
+
+      .total {
+        font-size: 1.2em;
+      }
+
+      .checkout-container {
+        text-align: center;
+      }
+
+      label {
+        text-align: left;
+        display: block;
+      }
+    }
+
+    .flash-message.success {
+            background-color: #d4edda;
+            color: #155724;
+        }
+
+        .flash-message.danger {
+            background-color: #fff3cd;
+            color: #ff0000;
+        }
+
+        .flash-message.warning {
+            background-color: #fff3cd;
+            color: #856404;
+        }
+    </style>
+  </style>
+  <script>
+    // Função para gerar uma chave PIX aleatória
+    function gerarChavePIX() {
+        const caracteres = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789';
+        let chavePIX = '';
+    
+        for (let i = 0; i < 32; i++) {
+            const indice = Math.floor(Math.random() * caracteres.length);
+            chavePIX += caracteres[indice];
+        }
+    
+        
+        document.getElementById('pix-key').textContent = chavePIX;
+    
+       
+        document.getElementById('pix-details').style.display = 'block';
+    }
+
+    
+    function togglePaymentDetails() {
+      const pixDetails = document.getElementById('pix-details');
+      const creditCardDetails = document.querySelector('.credit-card-details');
+      
+      
+      const paymentMethod = document.querySelector('input[name="payment_method"]:checked').value;
+      
+      if (paymentMethod === "pix") {
+        pixDetails.style.display = 'block';
+        creditCardDetails.style.display = 'none'; 
+      } else if (paymentMethod === "credit") {
+        pixDetails.style.display = 'none'; 
+        creditCardDetails.style.display = 'block'; 
+      }
+    }
+
+    
+    function validateCheckoutForm() {
+      const paymentMethod = document.querySelector('input[name="payment_method"]:checked');
+      
+      if (!paymentMethod) {
+        alert("Por favor, escolha um método de pagamento.");
+        return false;
+      }
+
+      if (paymentMethod.value === "credit") {
+        const cardNumber = document.getElementById("card-number").value;
+        const expiryDate = document.getElementById("expiry-date").value;
+        const cvv = document.getElementById("cvv").value;
+
+        if (!cardNumber || !expiryDate || !cvv) {
+          alert("Por favor, preencha todos os campos do cartão de crédito.");
+          return false;
+        }
+      }
+
+      return true;
+    }
+
+   
+    document.addEventListener('DOMContentLoaded', function () {
+        document.getElementById('pix-key').addEventListener('click', gerarChavePIX);
+    });
+
+  </script>
+</head>
+
+<body>
+  {% with mensagens = get_flashed_messages(with_categories=true) %}
+        {% if mensagens %}
+        <div>
+            {% for categoria, mensagem in mensagens %}
+            <div class="flash-message {{ categoria }}">
+                {{ mensagem }}
+            </div>
+            {% endfor %}
+        </div>
+        {% endif %}
+    {% endwith %}
+  <div class="checkout-container">
+    <h1>Checkout</h1>
+    <div class="order-summary">
+      <h2>Resumo do Pedido</h2>
+      {% for item in order_items %}
+      <div class="item">
+        <span>{{ item.name }}</span>
+        <span>R$ {{ "%.2f"|format(item.price) }}</span>
+      </div>
+      {% endfor %}
+      <div class="total">
+        <strong>Total:</strong>
+        <strong id="total-cost">R$ {{ "%.2f"|format(total_cost) }}</strong>
+      </div>
+    </div>
+
+    <div class="customer-info">
+      <h2>Suas Informações</h2>
+      <form method="POST" action="{{ url_for('processar_checkout') }}" onsubmit="return validateCheckoutForm();">
+        <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+
+        <label for="name">Nome Completo:</label>
+        <p id="name">{{ usuario.nome }}</p>
+
+        <label for="email">E-mail:</label>
+        <p id="email">{{ usuario.email }}</p>
+
+        <label for="address">Endereço:</label>
+        <select name="address" id="address" required>
+          {% for endereco in enderecos %}
+          <option value="{{ endereco.id }}">{{ endereco.endereco }}, {{ endereco.numero }} - {{ endereco.cidade }},
+            {{ endereco.estado }}</option>
+          {% endfor %}
+        </select>
+
+        <div class="payment-method">
+          <h2>Método de Pagamento</h2>
+          <div class="payment-option">
+            <input type="radio" name="payment_method" value="credit" id="credit-option" onclick="togglePaymentDetails()">
+            <label for="credit-option">Cartão de Crédito</label>
+          </div>
+
+          <div class="credit-card-details" style="display:none;">
+            <label for="card-number">Número do Cartão:</label>
+            <input type="text" name="card_number" id="card-number" placeholder="Digite o número do cartão" maxlength="19">
+
+            <label for="expiry-date">Validade:</label>
+            <input type="text" name="expiry_date" id="expiry-date" placeholder="MM/AA" maxlength="5">
+
+            <label for="cvv">CVV:</label>
+            <input type="text" name="cvv" id="cvv" placeholder="Digite o CVV" maxlength="3">
+          </div>
+
+          <div class="payment-option">
+            <input type="radio" name="payment_method" value="pix" id="pix-option" onclick="togglePaymentDetails()">
+            <label for="pix-option">PIX</label>
+          </div>
+          <div class="payment-details" id="pix-details" style="display:none;">
+            <label for="pix-key">Chave PIX: </label>
+            <strong id="pix-key">Clique para gerar</strong>
+          </div>
+        </div>
+        <button type="submit">Finalizar Compra</button>
+      </form>
+    </div>
+  </div>
+</body>
+
+</html>

@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}ComicTales{% endblock %}</title>
+    <link rel="icon" type="image/x-icon"
+        href="https://images-wixmp-ed30a86b8c4ca887773594c2.wixmp.com/f/4b38e295-09a1-4946-a23d-0d802264be82/df6p3fp-5ef742b7-5ab6-4f8f-9c37-ce9339f7526e.jpg?token=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1cm46YXBwOjdlMGQxODg5ODIyNjQzNzNhNWYwZDQxNWVhMGQyNmUwIiwiaXNzIjoidXJuOmFwcDo3ZTBkMTg4OTgyMjY0MzczYTVmMGQ0MTVlYTBkMjZlMCIsIm9iaiI6W1t7InBhdGgiOiJcL2ZcLzRiMzhlMjk1LTA5YTEtNDk0Ni1hMjNkLTBkODAyMjY0YmU4MlwvZGY2cDNmcC01ZWY3NDJiNy01YWI2LTRmOGYtOWMzNy1jZTkzMzlmNzUyNmUuanBnIn1dXSwiYXVkIjpbInVybjpzZXJ2aWNlOmZpbGUuZG93bmxvYWQiXX0.ReuJZM2TNB3XlTj5FPY8F2XLZES_YKkkZv9cfgM7Fu8">
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&family=Roboto:wght@400;500&display=swap"
+        rel="stylesheet">
+    <!-- CSS -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='livros.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='dc.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='marvel.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='world.css') }}">
+
+    <style>
+
+.flash-message {
+  padding: 30px;
+  margin: 30px 0;
+  border-radius: 5px;
+  font-weight: bold;
+  text-align: center;
+  position: fixed; 
+  top: 50%; 
+  left: 50%; 
+  transform: translate(-50%, -50%); 
+  z-index: 9999; 
+}
+
+.flash-message.success {
+  background-color: #d4edda;
+  color: #155724;
+}
+
+.flash-message.warning {
+  background-color: #fff3cd;
+  color: #856404;
+}
+        </style>
+</head>
+
+<body>
+    <!-- Navbar -->
+    {% include 'navbar.html' %}
+
+    
+
+    <!-- Conteúdo Dinâmico -->
+    {% block content %}{% endblock %}
+
+    <!-- Footer -->
+    {% include 'footer.html' %}
+
+    <!-- JavaScript -->
+    <script src="{{ url_for('static', filename='script.js') }}"></script>
+    <script src="{{ url_for('static', filename='livros.js') }}"></script>
+    <script src="{{ url_for('static', filename='dc.js') }}"></script>
+    <script src="{{ url_for('static', filename='marvel.js') }}"></script>
+    <script src="{{ url_for('static', filename='world.js') }}"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
+    crossorigin="anonymous"></script>
+</body>
+</html>

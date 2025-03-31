@@ -1,0 +1,571 @@
+
+/* Reset básico */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+  
+  /* Fonte padrão */
+  body {
+    font-family: 'Poppins', sans-serif;
+  }
+  
+  /* Navbar */
+  .navbar {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #2b2b2b;
+    padding: 10px 20px;
+    gap: 20px;
+  }
+  
+  /* Logo */
+  .logo {
+    display: flex;
+    flex-direction: column;
+    align-items: end;
+    margin-right: 10px; 
+    flex: 1;
+  }
+  
+  .logo-img {
+    width: 150px; 
+    height: 150px;
+    object-fit: contain;
+  
+  }
+  
+  /* Barra de pesquisa */
+   .search-bar {
+    display: flex;
+    flex: 3; 
+    margin: 0 auto;
+    border-radius: 5px;
+    overflow: hidden;
+    align-items: stretch;
+  }
+  
+  .search-input {
+    flex: 1;
+    padding: 12px 15px; 
+    border: none;
+    outline: none;
+    color: white;
+    background-color: transparent;
+    font-size: 16px;
+    background-color: #444;
+  }
+  
+  .search-input::placeholder {
+    color: #ccc;
+  }
+  
+  .search-btn {
+    background-color: #555;
+    border: none;
+    color: white;
+    padding: 12px 20px;
+    cursor: pointer;
+    font-size: 18px;
+    transition: background-color 0.3s;
+  }
+  
+  .search-btn:hover {
+    background-color: #666;
+  }
+  
+  .search-icon {
+      width: 20px; 
+      height: 20px; 
+      object-fit: contain;
+      filter: brightness(0) invert(1);
+    }
+  
+  #search-btn-mobile{
+    display: none;
+  
+  }
+  
+  #search-bar-mobile{
+    display: none;
+  }
+  
+  .search-disable-mobile{
+    display: none !important;
+  }
+  
+  /* Ícones */
+  .icons {
+    display: flex;
+    align-items: center;
+    margin-left: 15px;
+    flex: 1;
+    gap: 3px;
+  }
+  
+  .icon {
+    margin-left: 10px;
+  }
+  
+  .icon-img {
+    width: 28px;
+    height: 28px;
+    cursor: pointer;
+    transition: transform 0.3s ease, opacity 0.3s ease;
+    filter: brightness(0) invert(1);
+  }
+  
+  .icon-img:hover {
+    transform: scale(1.1);
+    opacity: 0.8;
+  }
+  
+  /* Dropdown para perfil */
+  .dropdown-profile {
+    position: relative;
+  }
+  
+  .dropdown-profile:hover .dropdown-content {
+    display: block;
+  }
+  
+  .dropdown-content {
+    display: none;
+    position: absolute;
+    top: 100%;
+    right: 0;
+    background-color: #444;
+    border-radius: 5px;
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.2);
+    min-width: 120px;
+  }
+  
+  .dropdown-content a {
+    display: block;
+    color: white;
+    text-decoration: none;
+    padding: 10px;
+    font-family: 'Roboto', sans-serif;
+    font-size: 14px;
+    transition: background-color 0.3s;
+  }
+  
+  .dropdown-content a:hover {
+    background-color: #555;
+  }
+  
+  /* Links da navbar */
+  .nav-links {
+    list-style: none;
+    display: flex;
+    justify-content: center;
+    background-color: #2b2b2b;
+    padding: 10px 0;
+  }
+  
+  .nav-links li {
+    margin: 0 10px;
+    position: relative; 
+  }
+  
+  .nav-links a {
+    font-family: 'Roboto', sans-serif;
+    font-weight: 500;
+    font-size: 16px;
+    color: white;
+    text-decoration: none;
+    padding: 8px 15px;
+    transition: background 0.3s;
+  }
+  
+  .nav-links a:hover {
+    background-color: #555;
+    border-radius: 5px;
+  }
+  
+  /* Dropdown específico do Comics */
+  .dropdown {
+    position: relative;
+  }
+  
+  .dropdown .dropdown-content {
+    display: none;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    background-color: #444;
+    border-radius: 5px;
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.2);
+    z-index: 1000;
+  }
+  
+  .dropdown .dropdown-content li {
+    margin: 0;
+    list-style: none;
+  }
+  
+  .dropdown .dropdown-content a {
+    padding: 10px 15px;
+    display: block;
+    color: white;
+    font-family: 'Roboto', sans-serif;
+    text-decoration: none;
+    transition: background-color 0.3s;
+  }
+  
+  .dropdown .dropdown-content a:hover {
+    background-color: #555;
+  }
+  
+
+  .dropdown:hover .dropdown-content {
+    display: block;
+  }
+  
+  /* Responsividade */
+  .menu-toggle {
+    display: none;
+    font-size: 28px;
+    color: white;
+    cursor: pointer;
+  }
+  
+  /* banner - livros */
+  .banner-container-livros {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 0;
+    padding: 0;
+    width: 100%;
+  }
+  
+  .banner-livros{
+  width: 100%;
+  }
+  
+ 
+  .responsive-banner-livros {
+    width: 100%; 
+    height: auto; 
+    display: block;
+  }
+  
+  
+  h2 {
+    text-align: center; 
+    font-family: 'Poppins', sans-serif; 
+    font-weight: 600;
+    margin-top: 20px; 
+    margin-bottom: 20px; 
+    color: #333; 
+  }
+  
+  /* Carrossel Personagens Livros */
+
+  .carrosselLIVROS {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    margin: 20px 0;
+    width: 100%;
+    padding: 0 5%;
+  }
+    .carrosselLivros-mobile{
+      display: none;
+      margin-bottom: 20px;
+    }
+  
+    .produto-livros-item-mobile{
+     max-width: 175px;
+     max-height: 300px;
+      width: 100%;
+      min-width: 175px;
+      display: flex;
+      flex-direction: column;
+      align-items: stretch;
+      height: 100%;
+      align-items: center;
+    }
+  
+    .produto-livros-item-mobile img{
+      width: 100%; 
+      height: 150px; 
+      object-fit: cover;
+      border-radius: 75px; 
+    
+    }
+  
+     .carrossel-livros-wrapper{
+      display: flex;  
+       width: 100%;
+       overflow: hidden;
+    }
+  
+    .carrossel-livros-itens {
+    display: flex;
+    width: 200%;
+    font-size: 18px;
+    transition: transform 0.5s ease-in-out;
+  }
+  
+    .carrossel-livros-grupo {
+    display: flex;
+    width: 100%;
+    justify-content: space-around;
+    align-items: center;
+    min-width: 100%;
+    max-width: 100%;
+  }
+  
+    .produto-livros-item{
+    text-align: center; 
+  }
+  
+  .produto-livros-item img {
+    width: 150px;
+    height: 150px; 
+    object-fit: cover;
+    border-radius: 50%;
+  }
+  
+  .button-container {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 15px;
+  }
+  
+.carrossel-flecha-livros{
+    background: rgba(0, 0, 0, 0.5);
+    border: none;
+    color: white;
+    padding: 10px 20px;
+    cursor: pointer;
+    font-size: 1.5rem;
+    border-radius: 5px;
+    z-index: 99;
+  }
+  
+  /* Efeito ao clicar na seta */
+  .carrossel-flecha-livros:active {
+    transform: scale(0.9); 
+    color: #E1AA16;
+  }
+  
+  
+  /* Carrossel-Lançamentos */
+  
+  .carrosselLancamentoLivros {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    margin: 20px 0;
+    width: 100%;
+    padding: 0 12%;
+    gap: 30px;
+  }
+    .carrossel-lancamento-livtos-mobile{
+      display: none;
+    }
+  
+    .produto-lancamento-livros-mobile{
+      min-width: 250px;
+      width: 100%;
+      display: flex;
+      flex-direction: column;
+      align-items: stretch;
+      height: 100%;
+      align-items: center;
+    }
+  
+    .produto-lancamento-livros-mobile > img{
+      height: 100%;
+      object-fit: contain;
+      width: 100%;
+      max-height: 300px;
+    }
+  
+     .carrossel-lancamento-livros-wrapper{
+      display: flex;  
+       width: 100%;
+       overflow: hidden;
+    }
+  
+  .carrossel-lancamento-livros-items{
+    display: flex;
+    width: 200%;
+    font-size: 14px;
+    transition: transform 0.5s ease-in-out;
+  }
+  
+  .carrossel-lancamento-livros-grupo {
+    display: flex;
+    width: 100%;
+    justify-content: stretch;
+    gap: 20px;
+    align-items: center;
+    min-width: 100%;
+    max-width: 100%;
+  
+  }
+  
+  .produto-lancamento-livros-items{
+    text-align: center;
+    flex: 1;
+  }
+  
+  .produto-lancamento-livros-items img {
+    width: 100px;
+    height: 150px;
+    object-fit: cover;
+  }
+  
+  .add-carrinho-lancamento-livros {
+    background-color: #E1AA16;
+    color: white;
+    border: none;
+    padding: 8px 16px;
+    font-size: 14px; 
+    border-radius: 4px; 
+    cursor: pointer;
+    margin-bottom: 10px; 
+    width: 100%; 
+    max-width: 250px; 
+  }
+  
+  .wishlist-lancamento-livros {
+    background-color: white;
+    color: black;
+    border: 1px solid #ccc;
+    padding: 8px 16px; 
+    font-size: 14px; 
+    border-radius: 4px;
+    cursor: pointer;
+    width: 100%; 
+    max-width: 250px;
+  }
+  
+  
+  .button-container {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start; 
+    gap: 10px; 
+  }
+  
+
+
+  
+  @media (max-width: 768px) {
+    .menu-toggle {
+      display: block;
+    }
+  
+    .logo{
+      align-items: start;
+    }
+  
+    .logo-img{
+      width: 100px;
+      height: 100px;
+    }
+  
+    
+    .search-bar {
+      display: none;
+    }
+  
+    #search-bar-mobile{
+      display: flex;
+      border-radius: 5px;
+      align-items: stretch;
+    }
+  
+    .icons {
+      margin-left: 5px;
+    }
+  
+    .nav-links {
+      flex-direction: column;
+      width: 100%;
+      display: none;
+    }
+  
+    .active {
+      display: flex;
+    }
+  
+    .nav-links li {
+      text-align: center;
+    }
+  
+    .nav-links a {
+      padding: 10px;
+      width: 100%;
+    }
+   
+    #search-btn-mobile{
+      display: block;
+  }
+
+
+  .responsive-banner-livros {
+    width: 100%; 
+  }
+
+  
+  .carrosselLivros-mobile{
+    display: flex;
+    gap: 20px;
+    overflow-y: hidden;
+    overflow-x: auto;
+    flex-wrap: nowrap;
+    max-height: 450px;
+    padding: 0 20px;
+    width: 100%;
+  }
+  
+  .carrosselLIVROS{
+    display: none;
+  }
+  
+  .carrossel-lancamento-livros-mobile{
+    display: flex;
+    gap: 20px;
+    overflow-y: hidden;
+    overflow-x: auto;
+    flex-wrap: nowrap;
+    max-height: 450px;
+    padding: 0 20px;
+  }
+  
+  .carrosselLancamentoLivros {
+    display: none;
+  }
+  
+  .grid-mais-produtos {
+    grid-template-columns: repeat(2, 1fr); 
+  }
+
+  .carrossel-3itens-manga-wrapper {
+    flex-direction: column;
+  }
+  }
+  
+  
+  @media (max-width: 480px) {
+  .responsive-banner-dc {
+    width: 100%; 
+  }
+  .grid-mais-produtos {
+    grid-template-columns: 1fr; 
+  }
+  }
+  
+  

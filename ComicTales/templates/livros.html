@@ -1,0 +1,219 @@
+{% extends "base.html" %}
+{% block title %}ComicTales - Livros{% endblock %}
+{% block content %}
+
+<body>
+  <div class="banner-container-livros">
+    <!-- Primeiro banner -->
+    <div class="banner-livros">
+      <img src="{{ url_for('static', filename='BannerLivros1.png') }}" alt="Primeiro Banner"
+        class="responsive-banner-livros">
+    </div>
+
+
+    <!-- Segundo banner -->
+    <div class="banner-livros">
+      <img src="{{ url_for('static', filename='BannerLivros2.png') }}" alt="Segundo Banner"
+        class="responsive-banner-livros">
+    </div>
+  </div>
+
+  <br>
+  <br>
+  <br>
+
+
+  <h2 style="align-items: center;">Personagens</h2>
+
+  <br>
+
+  <div class="carrosselLIVROS">
+    <button class="carrossel-flecha-livros" id="prevLivros">&#10094;</button>
+    <div class="carrossel-livros-wrapper">
+      <!-- Grupo 1 de itens -->
+      <div class="carrossel-livros-itens">
+        <div class="carrossel-livros-grupo" id="group-1">
+          <div class="produto-livros-item">
+            <a href="{{ url_for('exibir_personagem', personagem_url='harry-potter') }}" target="">
+              <img src="{{ url_for('static', filename='Harry Potter.jpeg') }}" alt="Harry Potter">
+            </a>
+            <h4>Harry Potter</h4>
+          </div>
+          <div class="produto-livros-item">
+            <a href="{{ url_for('exibir_personagem', personagem_url='percy-jackson') }}" target="">
+              <img src="{{ url_for('static', filename='Percy Jackson.jpeg') }}" alt="Percy Jackson">
+            </a>
+            <h4>Percy Jackson</h4>
+          </div>
+          <div class="produto-livros-item">
+            <a href="{{ url_for('exibir_personagem', personagem_url='the-witcher') }}" target="">
+              <img src="{{ url_for('static', filename='Geralt.jpeg') }}" alt="The Witcher">
+            </a>
+            <h4>The Witcher</h4>
+          </div>
+          <div class="produto-livros-item">
+            <a href="{{ url_for('exibir_personagem', personagem_url='narnia') }}" target="">
+              <img src="{{ url_for('static', filename='NarniaLucy.jpeg') }}" alt="Narnia">
+            </a>
+            <h4>Narnia</h4>
+          </div>
+          <div class="produto-livros-item">
+            <a href="{{ url_for('exibir_personagem', personagem_url='duna') }}" target="">
+              <img src="{{ url_for('static', filename='Paul Atreides Duna.jpeg') }}" alt="Duna">
+            </a>
+            <h4>Duna</h4>
+          </div>
+        </div>
+        <div class="carrossel-livros-grupo" id="group-2">
+          <div class="produto-livros-item">
+            <a href="{{ url_for('exibir_personagem', personagem_url='senhor-anéis') }}">
+              <img src="{{ url_for('static', filename='SenhordosAneis.jpeg') }}" alt="O Senhor dos Anéis">
+          </a>
+          
+            <h4>O Senhor dos Anéis</h4>
+          </div>
+          <div class="produto-livros-item">
+            <a href="{{ url_for('exibir_personagem', personagem_url='sherlock-holmes') }}" target="">
+              <img src="{{ url_for('static', filename='Sherlock Holmes icon.jpeg') }}" alt="Sherlock Holmes">
+            </a>
+            <h4>Sherlock Holmes</h4>
+          </div>
+          <div class="produto-livros-item">
+            <a href="{{ url_for('exibir_personagem', personagem_url='game-of-thrones') }}" target="">
+              <img src="{{ url_for('static', filename='GOT.jpeg') }}" alt="Game of Thrones">
+            </a>
+            <h4>Game of Thrones</h4>
+          </div>
+          <div class="produto-livros-item">
+            <a href="{{ url_for('exibir_personagem', personagem_url='jogos-vorazes') }}" target="">
+              <img src="{{ url_for('static', filename='JogosVorazes.jpeg') }}" alt="Jogos Vorazes">
+            </a>
+            <h4>Jogos Vorazes</h4>
+          </div>
+          <div class="produto-livros-item">
+            <a href="{{ url_for('exibir_personagem', personagem_url='crônicas') }}" target="">
+              <img src="{{ url_for('static', filename='GeloeFogo.jpeg') }}" alt="Cronicas Gelo e Fogo">
+            </a>
+            <h4>Crônicas do Gelo e Fogo</h4>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <button class="carrossel-flecha-livros" id="nextLivros">&#10095;</button>
+  </div>
+  <br>
+  <br>
+  <br>
+  <!-- Carrossel Personagens Mobile -->
+  <div class="carrosselLivros-mobile">
+    {% for personagem in personagens %}
+    <div class="produto-livros-item-mobile">
+      <a href="{{ url_for('personagem', personagem_url=personagem.nome|replace(' ', '-')) }}">
+        <img src="{{ url_for('static', filename=personagem.nome|replace(' ', '-') ~ '.jpeg') }}"
+          alt="{{ personagem.nome }}">
+      </a>
+      <h4>{{ personagem.nome }}</h4>
+    </div>
+    {% endfor %}
+  </div>
+
+  <!-- Carrossel - Lançamento - Livros -->
+  <br>
+  <br>
+  <h2>Lançamentos</h2>
+
+  <br>
+  <br>
+
+  <div class="carrosselLancamentoLivros">
+    <div class="carrossel-lancamento-livros-wrapper">
+      <div class="carrossel-lancamento-marvel-items">
+        <!-- Grupo 1 de itens -->
+        <div class="carrossel-lancamento-livros-grupo" id="group-1">
+          <div class="produto-lancamento-livros-items">
+            <a href="{{ url_for('exibir_produto', produto_id=78) }}">
+              <img src="{{ url_for('static', filename='boxthewitcher.jpg') }}" alt="The Witcher - Box capa dura">
+            </a>
+            <h4>The Witcher - Box capa dura</h4>
+            <br>
+            <p>R$ 386,18</p>
+            <form action="{{ url_for('adicionar_ao_carrinho', produto_id=78) }}" method="POST">
+              <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+              <button class="add-carrinho">Adicionar ao Carrinho</button>
+              <form action="{{ url_for('adicionar_a_lista_de_desejos', produto_id=78) }}" method="POST">
+                <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+                <button type="submit" class="wishlist">Adicionar à Lista de Desejos</button>
+              </form>
+          </div>
+          <div class="produto-lancamento-livros-items">
+            <a href="{{ url_for('exibir_produto', produto_id=79) }}">
+              <img src="{{ url_for('static', filename='boxharrypotter.jpg') }}"
+                alt="Box Harry Potter - Edição Pottermore: 7 livros">
+            </a>
+            <h4>Box Harry Potter - Edição Pottermore: 7 livros </h4>
+            <p>R$ 339,93</p>
+            <form action="{{ url_for('adicionar_ao_carrinho', produto_id=79) }}" method="POST">
+              <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+              <button class="add-carrinho">Adicionar ao Carrinho</button>
+              <form action="{{ url_for('adicionar_a_lista_de_desejos', produto_id=79) }}" method="POST">
+                <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+                <button type="submit" class="wishlist">Adicionar à Lista de Desejos</button>
+              </form>
+          </div>
+          <div class="produto-lancamento-livros-items">
+            <a href="{{ url_for('exibir_produto', produto_id=80) }}">
+              <img src="{{ url_for('static', filename='boxnarnia.jpg') }}"
+                alt="BOX As Crônicas de Nárnia - Edição de Luxo">
+            </a>
+            <h4>BOX As Crônicas de Nárnia - Edição de Luxo</h4>
+            <p>R$ 263,50</p>
+            <form action="{{ url_for('adicionar_ao_carrinho', produto_id=80) }}" method="POST">
+              <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+              <button class="add-carrinho">Adicionar ao Carrinho</button>
+              <form action="{{ url_for('adicionar_a_lista_de_desejos', produto_id=80) }}" method="POST">
+                <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+                <button type="submit" class="wishlist">Adicionar à Lista de Desejos</button>
+              </form>
+          </div>
+          <div class="produto-lancamento-livros-items">
+            <a href="{{ url_for('exibir_produto', produto_id=8) }}">
+              <img src="{{ url_for('static', filename='boxduna.jpg') }}" alt="Box Duna: Primeira Trilogia">
+            </a>
+            <h4>Box Duna: Primeira Trilogia</h4>
+            <br>
+            <p>R$ 221,90</p>
+            <form action="{{ url_for('adicionar_ao_carrinho', produto_id=8) }}" method="POST">
+              <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+              <button class="add-carrinho">Adicionar ao Carrinho</button>
+              <form action="{{ url_for('adicionar_a_lista_de_desejos', produto_id=81) }}" method="POST">
+                <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+                <button type="submit" class="wishlist">Adicionar à Lista de Desejos</button>
+              </form>
+          </div>
+          <div class="produto-lancamento-livros-items">
+            <a href="{{ url_for('exibir_produto', produto_id=82) }}">
+              <img src="{{ url_for('static', filename='boxgot.jpg') }}" alt="Box Game of Thrones">
+            </a>
+            <h4>Box Game of Thrones</h4>
+            <br>
+            <p>R$ 500,00</p>
+            <form action="{{ url_for('adicionar_ao_carrinho', produto_id=82) }}" method="POST">
+              <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+              <button class="add-carrinho">Adicionar ao Carrinho</button>
+              <form action="{{ url_for('adicionar_a_lista_de_desejos', produto_id=82) }}" method="POST">
+                <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+                <button type="submit" class="wishlist">Adicionar à Lista de Desejos</button>
+              </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  </div>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
+    crossorigin="anonymous"></script>
+  <script src="{{ url_for('static', filename='livros.js') }}"></script>
+</body>
+{% endblock %}

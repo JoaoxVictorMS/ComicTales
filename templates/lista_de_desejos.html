@@ -1,0 +1,276 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lista de Desejos</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+    <style>
+        .div-container {
+            font-family: Arial, sans-serif;
+            background-color: #f7f7f7;
+            min-height: 100vh;
+        }
+
+        .wrapper {
+            display: flex;
+            flex-wrap: wrap;
+            width: 90%;
+            max-width: 1200px;
+            margin-top: 50px;
+            gap: 20px;
+            justify-content: center;
+            align-items: flex-start;
+            min-height: 100vh;
+            margin-left: 100px;
+            font-family: Arial, sans-serif;
+        }
+
+        .sidebar {
+            width: 250px;
+            background-color: #ffffff;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            padding: 20px;
+            height: auto;
+            flex-shrink: 0;
+            font-family: Arial, sans-serif;
+        }
+
+        .sidebar ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .sidebar li {
+            margin-bottom: 15px;
+        }
+
+        .sidebar a {
+            text-decoration: none;
+            color: #004586;
+            display: flex;
+            align-items: center;
+            padding: 10px 15px;
+            border-radius: 4px;
+            transition: background-color 0.3s ease;
+        }
+
+        .sidebar a:hover {
+            background-color: #f0f8ff;
+        }
+
+        .sidebar a.active {
+            background-color: #003366;
+            color: #ffffff;
+        }
+
+        .sidebar a.active:hover {
+            background-color: #002244;
+        }
+
+        .sidebar a i {
+            margin-right: 10px;
+            font-size: 18px;
+        }
+
+        .sidebar h2 {
+            font-size: 18px;
+            color: #333333;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+
+        .container {
+            background-color: #fff;
+            flex-grow: 1;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+        }
+
+        .breadcrumb {
+            font-size: 14px;
+            color: #666;
+            margin-bottom: 20px;
+        }
+
+        .breadcrumb a {
+            text-decoration: none;
+            color: #007bff;
+        }
+
+        .breadcrumb a:hover {
+            text-decoration: underline;
+        }
+
+        h1 {
+            font-size: 24px;
+            color: #333;
+            margin-bottom: 20px;
+        }
+
+        .alert {
+            background-color: #fffae6;
+            border: 1px solid #E1AA16;
+            color: #856404;
+            padding: 15px;
+            border-radius: 4px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .alert-icon {
+            font-size: 18px;
+        }
+
+        .wishlist {
+            list-style-type: none;
+            padding: 0;
+        }
+
+        .wishlist li {
+            background-color: #ffffff;
+            border: 1px solid #9d9e9e;
+            color: #00060f;
+            padding: 10px;
+            border-radius: 2px;
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .wishlist img {
+            max-width: 100px;
+            border-radius: 5px;
+        }
+
+        .btn-remover {
+            background-color: #ff4d4d;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            font-size: 16px;
+            border-radius: 5px;
+            cursor: pointer;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        .btn-remover:hover {
+            background-color: #e60000;
+        }
+
+        /* Responsividade */
+        @media (max-width: 768px) {
+            .wrapper {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .sidebar {
+                width: 100%;
+                text-align: center;
+                padding: 10px;
+            }
+
+            .sidebar h2 {
+                font-size: 16px;
+            }
+
+            .sidebar a {
+                justify-content: center;
+            }
+
+            .container {
+                width: 100%;
+                padding: 15px;
+            }
+
+            h1 {
+                font-size: 20px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .breadcrumb {
+                font-size: 12px;
+            }
+
+            .alert {
+                font-size: 14px;
+                flex-direction: column;
+                text-align: center;
+            }
+
+            .wishlist li {
+                font-size: 14px;
+                flex-direction: column;
+                align-items: center;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    {% include 'navbar.html' %}
+
+    {% with mensagens = get_flashed_messages(with_categories=true) %}
+        {% if mensagens %}
+        <div>
+            {% for categoria, mensagem in mensagens %}
+            <div class="flash-message {{ categoria }}">
+                {{ mensagem }}
+            </div>
+            {% endfor %}
+        </div>
+        {% endif %}
+    {% endwith %}
+    <div class="wrapper">
+        <div class="sidebar">
+            <h2>Minha Conta</h2>
+            <ul>
+                <li><a href="{{ url_for('minha_conta') }}"><i>👤</i> Minha Conta</a></li>
+                <li><a href="{{ url_for('meus_enderecos') }}"><i>📍</i> Meus Endereços</a></li>
+                <li><a href="{{ url_for('meus_pedidos') }}"><i>📦</i> Meus Pedidos</a></li>
+                <li><a href="{{ url_for('lista_de_desejos') }}" class="active"><i>❤️</i> Lista de Desejos</a></li>
+            </ul>
+        </div>
+
+        <div class="container">
+            <div class="breadcrumb">
+                <a href="{{ url_for('index') }}">Home</a> &gt;
+                <a href="{{ url_for('minha_conta') }}">Minha Conta</a> &gt;
+                Lista de Desejos
+            </div>
+            <h1>Lista de Desejos</h1>
+            {% if not produtos %}
+            <p>Você não tem nenhum item em sua lista de desejos.</p>
+            {% else %}
+            <ul class="wishlist">
+                {% for produto in produtos %}
+                <li>
+                    <img src="{{ url_for('static', filename=produto.imagem) }}" alt="{{ produto.titulo }}">
+                    <div>
+                        <strong>{{ produto.titulo }}</strong>
+                        <br>
+                        <small>Preço: R$ {{ produto.preco }}</small>
+                        <br>
+                        <form method="post" action="{{ url_for('remover_da_lista_de_desejos', produto_id=produto.id) }}">
+                            <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+                            <button type="submit" class="btn-remover">Remover</button>
+                        </form>
+                    </div>
+                </li>
+                {% endfor %}
+            </ul>
+            {% endif %}
+
+        </div>
+    </div>
+</body>
+
+</html>
