@@ -116,37 +116,65 @@ python comictales.py
 
 Acesse a aplicação no seu navegador através de: `http://127.0.0.1:5000`
 
-<h2 id="routes">📍 Rotas Principais</h2>
+<h2 id="routes">📍 Rotas e Endpoints da Aplicação</h2>
 
-Aqui estão listadas as principais rotas e fluxos da aplicação **ComicTales**:
+Abaixo estão listadas todas as rotas mapeadas na aplicação **ComicTales**, divididas por módulos funcionais:
 
-| Rota                               | Descrição                                                                       |
-| :--------------------------------- | :------------------------------------------------------------------------------ |
-| <kbd>GET /</kbd>                   | Página inicial / Vitrine principal do e-commerce                                |
-| <kbd>GET /login</kbd>              | Tela de autenticação para clientes                                              |
-| <kbd>GET /criar_conta</kbd>        | Formulário de cadastro de novos clientes                                        |
-| <kbd>GET /carrinho</kbd>           | Visualização e gestão do carrinho de compras do cliente logado                  |
-| <kbd>GET /lista_desejos</kbd>      | Lista de produtos favoritados pelo cliente                                      |
-| <kbd>GET /admin/login</kbd>        | Tela de login restrita para administradores                                     |
-| <kbd>GET /produtos</kbd>           | Painel administrativo para gestão de produtos (Protegido por `@admin_required`) |
-| <kbd>GET /produtos/adicionar</kbd> | Formulário de cadastro de novos itens no catálogo (Acesso restrito ao Admin)    |
+### 🌐 Páginas Públicas, Catálogo e Busca
+| Rota | Método | Descrição |
+| :--- | :---: | :--- |
+| `<kbd>GET /</kbd>` | `GET` | Página inicial / Vitrine principal do e-commerce. |
+| `<kbd>GET /produto/<int:produto_id></kbd>` | `GET` | Página de exibição e detalhes de um quadrinho ou item específico. |
+| `<kbd>GET /search</kbd>` | `GET` | Processa a barra de busca e redireciona para os resultados. |
+| `<kbd>GET /search_results</kbd>` | `GET` | Exibe a página estruturada com os resultados da pesquisa. |
+| `<kbd>GET /dc</kbd>` | `GET` | Vitrine filtrada com produtos do universo DC Comics. |
+| `<kbd>GET /marvel</kbd>` | `GET` | Vitrine filtrada com produtos do universo Marvel. |
+| `<kbd>GET /livros</kbd>` | `GET` | Vitrine filtrada de livros e publicações especiais. |
+| `<kbd>GET /world_mangas</kbd>` | `GET` | Vitrine dedicada ao mundo dos mangás. |
+| `<kbd>GET /personagem/<personagem_url></kbd>` | `GET` | Filtro dinâmico de produtos por personagem específico. |
+| `<kbd>GET /template_lancamentos</kbd>` | `GET` | Seção especial de novos lançamentos da loja. |
+| `<kbd>GET /perguntas_frequentes</kbd>` | `GET` | Página institucional de FAQ (Dúvidas frequentes). |
+| `<kbd>GET /politica_cookie</kbd>` | `GET` | Termos e política de cookies. |
+| `<kbd>GET /politica_privacidade</kbd>` | `GET` | Política de privacidade do e-commerce. |
+| `<kbd>GET /termos_condicoes</kbd>` | `GET` | Termos e condições gerais de uso. |
 
-<h2 id="colab">🤝 Colaboradores</h2>
+### 👤 Autenticação e Gestão de Clientes
+| Rota | Método | Descrição |
+| :--- | :---: | :--- |
+| `<kbd>GET /login</kbd>` | `GET` | Exibe a tela de login de clientes. |
+| `<kbd>POST /autenticar</kbd>` | `POST` | Processa as credenciais de login do usuário (com verificação de senha via Bcrypt). |
+| `<kbd>GET /criar_conta.html</kbd>` | `GET` / `POST` | Exibe o formulário e processa o cadastro de uma nova conta de cliente. |
+| `<kbd>GET /logout</kbd>` | `GET` | Encerra a sessão ativa do usuário cliente. |
+| `<kbd>GET /minha_conta</kbd>` | `GET` | Painel do cliente logado (exibe dados cadastrais). |
+| `<kbd>GET /meus_enderecos</kbd>` | `GET` / `POST` | Gerenciamento e listagem dos endereços cadastrados do usuário. |
+| `<kbd>GET /adicionar_endereco</kbd>` | `GET` / `POST` | Formulário para cadastro de um novo endereço de entrega. |
+| `<kbd>GET /editar_endereco/<int:id></kbd>` | `GET` / `POST` | Edição de um endereço já cadastrado. |
+| `<kbd>POST /remover_endereco/<int:id></kbd>` | `POST` | Exclusão de um endereço do usuário. |
+| `<kbd>GET /meus_pedidos</kbd>` | `GET` | Histórico de compras e pedidos realizados pelo cliente. |
 
-Um agradecimento especial a todas as pessoas que contribuíram para este projeto.
+### 🛒 Carrinho, Lista de Desejos e Checkout
+| Rota | Método | Descrição |
+| :--- | :---: | :--- |
+| `<kbd>GET /carrinho</kbd>` | `GET` | Exibe os itens adicionados no carrinho de compras e o valor total. |
+| `<kbd>POST /adicionar_ao_carrinho/<id></kbd>` | `POST` | Adiciona uma quantidade específica de um produto ao carrinho. |
+| `<kbd>POST /remover_do_carrinho/<id></kbd>` | `POST` | Remove um item do carrinho de compras. |
+| `<kbd>GET /lista_de_desejos</kbd>` | `GET` | Exibe a lista de produtos salvos como favoritos pelo cliente. |
+| `<kbd>POST /adicionar_a_lista_de_desejos/<id></kbd>`| `POST` | Adiciona um item à lista de desejos (requer autenticação). |
+| `<kbd>POST /remover_da_lista_de_desejos/<id></kbd>` | `POST` | Remove um item da lista de desejos. |
+| `<kbd>GET /checkout</kbd>` | `GET` / `POST` | Página de revisão de endereço e pagamento para fechamento do pedido. |
+| `<kbd>POST /processar_checkout</kbd>` | `POST` | Converte o carrinho em pedidos definitivos e limpa o carrinho. |
 
-<table>
-  <tr>
-    <td align="center">
-      <a href="https://github.com/JoaoxVictorMS">
-        <img src="https://avatars.githubusercontent.com/u/98715957?v=4" width="100px;" alt="Foto de perfil do João Victor"/><br>
-        <sub>
-          <b>João Victor</b>
-        </sub>
-      </a>
-    </td>
-  </tr>
-</table>
+### ⚙️ Painel Administrativo (Restrito)
+> *Nota: Todas as rotas abaixo são protegidas pelo decorador personalizado `@admin_required`, exigindo sessão de administrador ativa.*
+
+| Rota | Método | Descrição |
+| :--- | :---: | :--- |
+| `<kbd>GET /admin/login</kbd>` | `GET` / `POST` | Tela de autenticação exclusiva para administradores. |
+| `<kbd>GET /admin/logout</kbd>` | `GET` | Encerra a sessão administrativa. |
+| `<kbd>GET /produtos</kbd>` | `GET` | Painel principal de listagem e gerenciamento de produtos. |
+| `<kbd>POST /produtos/adicionar</kbd>` | `POST` | Processa o cadastro de novo produto e upload de imagem. |
+| `<kbd>GET /produtos/editar/<id></kbd>` | `GET` / `POST` | Formulário e processamento da edição de um produto. |
+| `<kbd>POST /produtos/excluir/<id></kbd>` | `POST` | Remove permanentemente um produto da base de dados. |
 
 <h2 id="contribute">📫 Contribua</h2>
 
