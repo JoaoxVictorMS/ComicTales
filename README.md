@@ -194,7 +194,7 @@ Um agradecimento especial a todas as pessoas que contribuíram para este projeto
       <a href="https://github.com/FernandessFelipe">
         <img src="https://avatars.githubusercontent.com/u/181539218?v=4" width="100px;" alt="Foto de perfil do João Victor"/><br>
         <sub>
-          <b>João Victor</b>
+          <b>Felipe Fernandes</b>
         </sub>
       </a>
     </td>
@@ -202,7 +202,7 @@ Um agradecimento especial a todas as pessoas que contribuíram para este projeto
       <a href="https://github.com/guumendess">
         <img src="https://avatars.githubusercontent.com/u/133999103?v=4" width="100px;" alt="Foto de perfil do João Victor"/><br>
         <sub>
-          <b>João Victor</b>
+          <b>Gustavo Mendes</b>
         </sub>
       </a>
     </td>
