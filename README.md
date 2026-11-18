@@ -19,10 +19,6 @@
 </p>
 
 <p align="center">
-     <a href="https://github.com/JoaoxVictorMS/ComicTales">📱 Visit this Project</a>
-</p>
-
-<p align="center">
     <b>Plataforma de e-commerce e vitrine digital especializada em quadrinhos, mangás e colecionáveis.</b>
 </p>
 
@@ -30,7 +26,9 @@
 
 <p align="center">
     <img src="m_project/CT_index.gif" alt="Vitrine Inicial" width="300px">
+    <br />
     <img src="m_project/CT_user.gif" alt="Área do Cliente" width="300px">
+    <br />
     <img src="m_project/CT_admin.gif" alt="Painel Administrativo" width="300px">
 </p>
 
