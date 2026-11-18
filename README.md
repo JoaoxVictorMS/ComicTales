@@ -176,6 +176,39 @@ Abaixo estão listadas todas as rotas mapeadas na aplicação **ComicTales**, di
 | `GET /produtos/editar/<id>` | GET / POST | Formulário e processamento da edição de um produto. |
 | `POST /produtos/excluir/<id>` | POST | Remove permanentemente um produto da base de dados. |
 
+<h2 id="colab">🤝 Colaboradores</h2>
+
+Um agradecimento especial a todas as pessoas que contribuíram para este projeto.
+
+<table>
+  <tr>
+    <td align="center">
+      <a href="https://github.com/JoaoxVictorMS">
+        <img src="https://avatars.githubusercontent.com/u/98715957?v=4" width="100px;" alt="Foto de perfil do João Victor"/><br>
+        <sub>
+          <b>João Victor</b>
+        </sub>
+      </a>
+    </td>
+      <td align="center">
+      <a href="https://github.com/FernandessFelipe">
+        <img src="https://avatars.githubusercontent.com/u/181539218?v=4" width="100px;" alt="Foto de perfil do João Victor"/><br>
+        <sub>
+          <b>João Victor</b>
+        </sub>
+      </a>
+    </td>
+      <td align="center">
+      <a href="https://github.com/guumendess">
+        <img src="https://avatars.githubusercontent.com/u/133999103?v=4" width="100px;" alt="Foto de perfil do João Victor"/><br>
+        <sub>
+          <b>João Victor</b>
+        </sub>
+      </a>
+    </td>
+  </tr>
+</table>
+
 <h2 id="contribute">📫 Contribua</h2>
 
 Contribuições são sempre bem-vindas! Siga os passos abaixo para colaborar com o projeto:
