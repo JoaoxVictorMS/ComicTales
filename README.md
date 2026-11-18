@@ -1,7 +1,7 @@
 <h1 align="center" style="font-weight: bold;">ComicTales</h1>
 
 <p align="center">
-    <img src="static/ComicTales-Photoroom.png" alt="ComicTales Logo" width="400px">
+    <img src="static/ComicTales-Photoroom.png" alt="ComicTales Logo" width="300px">
 </p>
 
 [PYTHON__BADGE]: https://img.shields.io/badge/Python-%233776AB.svg?style=for-the-badge&logo=python&logoColor=white
