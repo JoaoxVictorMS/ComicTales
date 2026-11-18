@@ -25,11 +25,11 @@
 <h2 id="layout">🎨 Layout/Preview</h2>
 
 <p align="center">
-    <img src="m_project/CT_index.gif" alt="Vitrine Inicial" width="300px">
+    <img src="m_project/CT_index.gif" alt="Vitrine Inicial" width="500px">
     <br />
-    <img src="m_project/CT_user.gif" alt="Área do Cliente" width="300px">
+    <img src="m_project/CT_user.gif" alt="Área do Cliente" width="500px">
     <br />
-    <img src="m_project/CT_admin.gif" alt="Painel Administrativo" width="300px">
+    <img src="m_project/CT_admin.gif" alt="Painel Administrativo" width="500px">
 </p>
 
 <h2 id="technologies">💻 Tecnologias</h2>
