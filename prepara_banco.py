@@ -25,7 +25,7 @@ try:
         CREATE TABLE `usuarios` (
         `cpf` VARCHAR(11) NOT NULL,
         `email` VARCHAR(255) NOT NULL,
-        `senha` VARCHAR(100) NOT NULL,
+        `senha` VARCHAR(255) NOT NULL,
         `nome` VARCHAR(50) NOT NULL,
         `sobrenome` VARCHAR(50) NOT NULL,
         `pais` VARCHAR(50) NOT NULL,
